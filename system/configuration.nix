@@ -39,7 +39,8 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "us";
+    layout = "us,ru";
+    xkbOptions = "grp:alt_shift_toggle, caps:swapescape";
     # xkbOptions = {
     #   #"eurosign:e",
     #   "caps:escape" # map caps to escape.
@@ -89,7 +90,6 @@
   environment.shells = [ pkgs.zsh ];
   environment.systemPackages = with pkgs; [
     git
-    neovim
     xorg.xbacklight
     wget
   ];
