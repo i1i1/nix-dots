@@ -40,6 +40,9 @@
           nano
           pinentry_gtk2
           acpi
+          llvm
+          clang
+          mold
           rustup
           tdesktop
           pavucontrol
