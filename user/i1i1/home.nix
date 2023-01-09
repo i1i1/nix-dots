@@ -25,6 +25,7 @@
         polybar = pkgs.polybar.override {
           i3Support = true;
         };
+        firefox = callPackage ./firefox.nix {};
       in
         [
           acpi
