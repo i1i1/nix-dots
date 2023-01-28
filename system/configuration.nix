@@ -68,7 +68,7 @@
           [
             dmenu
             i3lock
-	    polybar
+            polybar
           ];
     };
   };
