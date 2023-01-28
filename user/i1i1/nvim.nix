@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   nixvim = import (builtins.fetchGit {
     url = "https://github.com/pta2002/nixvim";
@@ -58,15 +58,18 @@ in
       lsp = {
         enable = true;
         servers = {
-          rust-analyzer.enable = true;
           rnix-lsp.enable = true;
+          rust-analyzer.enable = true;
         };
+        onAttach = ''
+          vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+        '';
       };
 
       nvim-cmp = {
         enable = true;
-        sources = [{name = "nvim_lsp";} {name = "luasnip";}];
-        mappingPresets = ["insert"];
+        sources = [{ name = "nvim_lsp"; } { name = "luasnip"; } { name = "crates"; } { name = "path"; }];
+        mappingPresets = [ "insert" ];
         mapping = {
           "<CR>" = "cmp.mapping.confirm({ select = true })";
           "<S-Tab>" = "cmp.mapping.select_prev_item()";
@@ -74,13 +77,18 @@ in
           "<Tab>" = "cmp.mapping.select_next_item()";
           "<C-j>" = "cmp.mapping.select_next_item()";
         };
-        formatting.fields = ["kind" "abbr" "menu"];
+        formatting.fields = [ "kind" "abbr" "menu" ];
       };
 
       rust-tools = {
         enable = true;
+        reloadWorkspaceFromCargoToml = true;
         inlayHints = {
           auto = true;
+          otherHintsPrefix = "  ";
+        };
+        server = {
+          checkOnSave.command = "clippy";
         };
       };
 
@@ -109,6 +117,11 @@ in
         openOnSetup = true;
         git.enable = true;
       };
+      treesitter = {
+        enable = true;
+        nixGrammars = true;
+        ensureInstalled = "all";
+      };
 
       lualine = { enable = true; theme = "ayu_dark"; };
 
@@ -120,8 +133,16 @@ in
       cmp_luasnip.enable = true;
       luasnip.enable = true;
       telescope.enable = true;
-      treesitter.enable = true;
     };
+    extraPlugins = with pkgs.vimPlugins; [
+      fidget-nvim
+      crates-nvim
+    ];
+    extraConfigLua = ''
+      require"fidget".setup{}
+      require"crates".setup{}
+    '';
+
+    extraPackages = [ pkgs.xclip ];
   };
 }
-
