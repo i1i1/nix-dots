@@ -36,6 +36,7 @@
         docker
         feh
         firefox
+        file
         fzf
         git-crypt
         gnupg
