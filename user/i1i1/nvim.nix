@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 let
   nixvim = import (builtins.fetchGit {
     url = "https://github.com/pta2002/nixvim";
@@ -57,8 +57,10 @@ in
     plugins = {
       lsp = {
         enable = true;
-        servers.rust-analyzer.enable = true;
-        servers.rnix-lsp.enable = true;
+        servers = {
+          rust-analyzer.enable = true;
+          rnix-lsp.enable = true;
+        };
       };
 
       nvim-cmp = {
@@ -67,10 +69,19 @@ in
         mappingPresets = ["insert"];
         mapping = {
           "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<S-Tab>" = "cmp.mapping.select_prev_item()";
           "<C-k>" = "cmp.mapping.select_prev_item()";
+          "<Tab>" = "cmp.mapping.select_next_item()";
           "<C-j>" = "cmp.mapping.select_next_item()";
         };
         formatting.fields = ["kind" "abbr" "menu"];
+      };
+
+      rust-tools = {
+        enable = true;
+        inlayHints = {
+          auto = true;
+        };
       };
 
       lspkind = {
@@ -98,13 +109,14 @@ in
         openOnSetup = true;
         git.enable = true;
       };
+
       lualine = { enable = true; theme = "ayu_dark"; };
 
       comment-nvim.enable = true;
       lsp-lines.enable = true;
       nix.enable = true;
       nvim-autopairs.enable = true;
-      bufferline.enable = true;
+      # bufferline.enable = true;
       cmp_luasnip.enable = true;
       luasnip.enable = true;
       telescope.enable = true;
