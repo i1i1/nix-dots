@@ -26,34 +26,35 @@
         polybar = pkgs.polybar.override {
           i3Support = true;
         };
-        firefox = callPackage ./firefox.nix {};
+        firefox = callPackage ./firefox.nix { };
       in
-        [
-          acpi
-          alacritty
-          chromium
-          dmenu
-          docker
-          feh
-          firefox
-          fzf
-          git-crypt
-          gnupg
-          htop
-          i3lock
-          killall
-          nano
-          pavucontrol
-          pinentry_gtk2
-          polybar
-          ripgrep
-          scrot
-          tdesktop
-          usbutils
-          wget
-          xorg.xbacklight
-          zsh
-        ];
+      [
+        acpi
+        alacritty
+        chromium
+        dmenu
+        docker
+        feh
+        firefox
+        fzf
+        git-crypt
+        gnupg
+        htop
+        i3lock
+        killall
+        nano
+        pavucontrol
+        pinentry_gtk2
+        polybar
+        ripgrep
+        scrot
+        tdesktop
+        usbutils
+        wget
+        xorg.xbacklight
+        zlib
+        zsh
+      ];
   };
 
   # Let Home Manager install and manage itself.
