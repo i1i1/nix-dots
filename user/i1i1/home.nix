@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./nvim.nix
+    ./git.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -30,22 +31,25 @@
         [
           acpi
           alacritty
+          chromium
           dmenu
+          docker
           feh
           firefox
           fzf
-          git
           git-crypt
           gnupg
           htop
           i3lock
+          killall
           nano
           pavucontrol
           pinentry_gtk2
           polybar
           ripgrep
+          scrot
           tdesktop
-          chromium
+          usbutils
           wget
           xorg.xbacklight
           zsh
