@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       <home-manager/nixos>
     ];
@@ -30,7 +31,7 @@
   networking.hostName = "i1i1"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
@@ -65,11 +66,11 @@
             i3Support = true;
           };
         in
-          [
-            dmenu
-            i3lock
-            polybar
-          ];
+        [
+          dmenu
+          i3lock
+          polybar
+        ];
     };
   };
 
@@ -96,7 +97,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.i1i1 = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.zsh;
   };
 
@@ -107,6 +108,7 @@
     git
     xorg.xbacklight
     wget
+    zlib
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -121,8 +123,10 @@
     zsh.enable = true;
   };
 
+  virtualisation.docker.enable = true;
+
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; } )
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
   # List services that you want to enable:
 
