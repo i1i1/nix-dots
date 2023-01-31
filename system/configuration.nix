@@ -98,12 +98,12 @@
   users.users.i1i1 = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.shells = [ pkgs.zsh ];
+  environment.shells = [ pkgs.fish ];
   environment.systemPackages = with pkgs; [
     git
     xorg.xbacklight
@@ -120,7 +120,6 @@
       enable = true;
       enableSSHSupport = true;
     };
-    zsh.enable = true;
   };
 
   virtualisation.docker.enable = true;
