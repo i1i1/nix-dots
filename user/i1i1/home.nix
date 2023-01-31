@@ -32,11 +32,14 @@ in
         firefox = callPackage ./firefox.nix { };
       in
       [
+        # cargo-sweep
+        # rustup
         acpi
         alacritty
         bat
         chromium
         dmenu
+        exa
         feh
         file
         firefox
@@ -47,17 +50,17 @@ in
         killall
         ltrace
         nano
+        neovide
         pavucontrol
         pinentry_gtk2
         polybar
+        python311
         ripgrep
         scrot
         strace
         tdesktop
         usbutils
         wget
-        # rustup
-        # cargo-sweep
         xorg.xbacklight
         zlib
       ];
@@ -69,47 +72,74 @@ in
     gpg.enable = true;
     direnv = {
       enable = true;
-      enableZshIntegration = true;
       nix-direnv.enable = true;
     };
 
     fzf = {
       enable = true;
-      enableZshIntegration = true;
+      enableFishIntegration = true;
     };
 
-    zsh = {
+    fish = {
       enable = true;
 
       shellAliases = {
         ca = "cargo";
         g = "git";
         n = "nv";
+        ls = "exa";
         nv = "nvim";
       };
 
-      oh-my-zsh = {
-        enable = true;
-        theme = "eastwood";
-        plugins = [ "git" "gitfast" "fzf" "docker" "rust" "ripgrep" ];
-      };
+      plugins =
+        let
+          fromNix = name: {
+            name = name;
+            src = pkgs.fishPlugins.${name}.src;
+          };
+        in
+        map fromNix [
+          "bass"
+          "colored-man-pages"
+          "done"
+          "fzf-fish"
+          "hydro"
+          "pisces"
+          "sponge"
+        ] ++ [
+          {
+            name = "z";
+            src = pkgs.fetchFromGitHub
+              {
+                owner = "jethrokuan";
+                repo = "z";
+                rev = "85f863f20f24faf675827fb00f3a4e15c7838d76";
+                sha256 = "1kaa0k9d535jnvy8vnyxd869jgs0ky6yg55ac1mxcxm8n0rh2mgq";
+              };
+          }
+        ];
 
-      initExtra = ''
-        chhm() {
+      shellInit = ''
+        function chhm
             pushd ~/.dotfiles/user/i1i1/
             $EDITOR home.nix
             home-manager switch -f home.nix
             popd
-        }
-        chnix() {
+        end
+
+        function chnix
             pushd ~/.dotfiles/system
             $EDITOR configuration.nix
             apply-configuration
             popd
-        }
+        end
 
-        source $HOME/.cargo/env
-        export PATH=$HOME/.local/bin:$HOME/.dotfiles:$PATH
+        set -gx EDITOR nvim
+        set -gx CARGO_TARGET_DIR $HOME/.cargo-target
+        bass source $HOME/.cargo/env
+        fish_add_path $HOME/.local/bin
+        set -U fish_user_paths $HOME/.local/bin $fish_user_paths
+        set -U fish_user_paths $HOME/.dotfiles $fish_user_paths
       '';
     };
   };
@@ -119,11 +149,6 @@ in
   };
 
   systemd.user = {
-    sessionVariables = {
-      EDITOR = "nvim";
-      CARGO_TARGET_DIR = "${homeDirectory}/.cargo-target";
-    };
-
     # TODO
     # services.cargo-sweep = {
     #   Unit.Description = "Remove unnecessarry cargo files";
