@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    ./nvim.nix
+    # ./nvim.nix
     ./git.nix
   ];
 
@@ -39,6 +39,7 @@ in
         bat
         chromium
         dmenu
+        neovim
         exa
         feh
         file
@@ -123,7 +124,7 @@ in
         function chhm
             pushd ~/.dotfiles/user/i1i1/
             $EDITOR home.nix
-            home-manager switch -f home.nix
+            apply-user
             popd
         end
 

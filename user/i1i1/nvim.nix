@@ -129,11 +129,12 @@ in
       lsp-lines.enable = true;
       nix.enable = true;
       nvim-autopairs.enable = true;
-      # bufferline.enable = true;
+      bufferline.enable = true;
       cmp_luasnip.enable = true;
       luasnip.enable = true;
       telescope.enable = true;
     };
+
     extraPlugins = with pkgs.vimPlugins; [
       fidget-nvim
       crates-nvim

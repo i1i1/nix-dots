@@ -13,12 +13,10 @@
   outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-
       pkgs = import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
       };
-
       lib = nixpkgs.lib;
 
     in
@@ -29,18 +27,18 @@
 
           modules = [
             ./system/configuration.nix
-            # home-manager.nixosModules.home-manager
-            # {
-            #   home-manager = {
-            #     useGlobalPkgs = true;
-            #   };
-            # }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+              };
+            }
           ];
         };
       };
       homeConfigurations.i1i1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        imports = [ ./user/i1i1/home.nix ];
+        modules = [ ./user/i1i1/home.nix ];
       };
     };
 }

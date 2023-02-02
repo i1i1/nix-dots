@@ -1,0 +1,5 @@
+#!/bin/sh
+pushd ~/.dotfiles
+nix build --no-link .#homeConfigurations.i1i1.activationPackage
+"$(nix path-info .#homeConfigurations.jdoe.activationPackage)"/activate
+popd
