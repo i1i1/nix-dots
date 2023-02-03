@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./wm.nix
     ];
 
   nix = {
@@ -46,52 +47,21 @@
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    layout = "us,ru";
-    xkbOptions = "grp:alt_shift_toggle, caps:swapescape";
-    dpi = 130;
-
-    libinput.enable = true;
-
-    #desktopManager.xterm.enable = false;
-    displayManager.defaultSession = "none+i3";
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs;
-        let
-          polybar = pkgs.polybar.override {
-            i3Support = true;
-          };
-        in
-        [
-          dmenu
-          i3lock
-          polybar
-        ];
-    };
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
-  hardware = {
-    pulseaudio.enable = true;
-    bluetooth = {
-      enable = true;
-      settings = {
-        General = {
-          Enable = "Source,Sink,Media,Socket";
-        };
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
       };
     };
   };
 
   services.blueman.enable = true;
-
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.i1i1 = {
@@ -108,15 +78,11 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs = {
-    dconf.enable = true;
     mtr.enable = true;
   };
 
   virtualisation.docker.enable = true;
 
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
-  ];
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
