@@ -89,6 +89,9 @@ in
         n = "nv";
         ls = "exa";
         nv = "nvim";
+        apply-user = "home-manager switch --flake ~/.dotfiles#i1i1";
+        apply-system = "sudo nixos-rebuild switch --flake ~/.dotfiles#";
+        update-system = "nix flake update ~/.dotfiles";
       };
 
       plugins =
@@ -130,7 +133,7 @@ in
         function chnix
             pushd ~/.dotfiles/system
             $EDITOR configuration.nix
-            apply-configuration
+            apply-system
             popd
         end
 
@@ -144,7 +147,11 @@ in
   };
 
   services = {
-    gpg-agent.enable = true;
+    gpg-agent = {
+      enable = true;
+      enableFishIntegration = true;
+      enableSshSupport = true;
+    };
   };
 
   systemd.user = {

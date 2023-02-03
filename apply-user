@@ -1,6 +1,0 @@
-#!/bin/sh
-set -ex
-pushd ~/.dotfiles
-nix build --no-link .#homeConfigurations.i1i1.activationPackage
-"$(nix path-info .#homeConfigurations.i1i1.activationPackage)"/activate
-popd

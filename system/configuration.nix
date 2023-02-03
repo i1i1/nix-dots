@@ -102,23 +102,14 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.shells = [ pkgs.fish ];
-  environment.systemPackages = with pkgs; [
-    git
-    xorg.xbacklight
-    wget
-    zlib
-  ];
+  environment.shells = [ ];
+  environment.systemPackages = [ ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs = {
     dconf.enable = true;
     mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
   };
 
   virtualisation.docker.enable = true;
