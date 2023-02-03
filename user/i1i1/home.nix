@@ -134,7 +134,6 @@ in
             popd
         end
 
-        set -gx EDITOR nvim
         set -gx CARGO_TARGET_DIR $HOME/.cargo-target
         bass source $HOME/.cargo/env
         fish_add_path $HOME/.local/bin

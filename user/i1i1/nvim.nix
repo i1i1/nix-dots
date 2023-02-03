@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  home.sessionVariables.EDITOR = "nvim";
+  systemd.user.sessionVariables.EDITOR = "nvim";
+
   programs.nixvim = {
     enable = true;
     colorschemes.onedark.enable = true;
