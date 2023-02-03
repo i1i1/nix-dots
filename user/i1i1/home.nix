@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    # ./nvim.nix
+    ./nvim.nix
     ./git.nix
   ];
 
@@ -39,7 +39,6 @@ in
         bat
         chromium
         dmenu
-        neovim
         exa
         feh
         file

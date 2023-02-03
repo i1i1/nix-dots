@@ -7,10 +7,14 @@
       url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = github:pta2002/nixvim;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -38,7 +42,10 @@
       };
       homeConfigurations.i1i1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./user/i1i1/home.nix ];
+        modules = [
+          ./user/i1i1/home.nix
+          nixvim.homeManagerModules.nixvim
+        ];
       };
     };
 }

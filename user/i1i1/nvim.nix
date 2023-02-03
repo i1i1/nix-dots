@@ -1,14 +1,5 @@
 { pkgs, ... }:
-let
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/pta2002/nixvim";
-  });
-in
 {
-  imports = [
-    nixvim.homeManagerModules.nixvim
-  ];
-
   programs.nixvim = {
     enable = true;
     colorschemes.onedark.enable = true;
