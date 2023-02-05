@@ -6,6 +6,7 @@ in
   imports = [
     ./nvim.nix
     ./fish.nix
+    ./kitty.nix
     ./git.nix
   ];
 
