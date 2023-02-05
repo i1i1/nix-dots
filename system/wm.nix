@@ -11,20 +11,7 @@
 
     #desktopManager.xterm.enable = false;
     displayManager.defaultSession = "none+i3";
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs;
-        let
-          polybar = pkgs.polybar.override {
-            i3Support = true;
-          };
-        in
-        [
-          dmenu
-          i3lock
-          polybar
-        ];
-    };
+    windowManager.i3.enable = true;
   };
 
   hardware.pulseaudio.enable = true;

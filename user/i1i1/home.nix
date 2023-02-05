@@ -40,6 +40,7 @@ in
         bat
         chromium
         dmenu
+        dmenu
         exa
         feh
         file
