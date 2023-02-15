@@ -49,6 +49,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.localtime.enable = true;
 
   # Enable sound.
   sound.enable = true;
