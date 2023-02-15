@@ -41,11 +41,11 @@ in
         bat
         chromium
         dmenu
-        dmenu
         exa
         feh
         file
         firefox
+        git
         git-crypt
         gnupg
         htop
@@ -62,6 +62,7 @@ in
         scrot
         strace
         tdesktop
+        unzip
         usbutils
         wget
         xorg.xbacklight

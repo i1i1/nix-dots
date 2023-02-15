@@ -11,6 +11,7 @@
       g = "git";
       n = "nv";
       ls = "exa";
+      la = "ll -a";
       nv = "nvim";
       apply-user = "home-manager switch --flake ~/.dotfiles#i1i1";
       apply-system = "sudo nixos-rebuild switch --flake ~/.dotfiles#";
