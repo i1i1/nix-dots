@@ -1,8 +1,11 @@
 { pkgs, ... }:
 {
+  home.sessionVariables.TERMINAL = "kitty";
+  systemd.user.sessionVariables.TERMINAL = "kitty";
+
   programs.kitty = {
     enable = true;
-    font.name = "jetbrains mono nerd font";
+    font.name = "FiraCode";
     font.size = 15;
     settings = {
       italic_font = "auto";
@@ -16,49 +19,27 @@
       background_opacity = "0.95";
     };
     extraConfig = ''
-      # Nord Colorscheme for Kitty
-      # Based on:
-      # - https://gist.github.com/marcusramberg/64010234c95a93d953e8c79fdaf94192
-      # - https://github.com/arcticicestudio/nord-hyper
-
-      foreground            #D8DEE9
-      background            #434c5e
-      selection_foreground  #000000
-      selection_background  #FFFACD
-      url_color             #0087BD
-      cursor                #81A1C1
-
-      # black
-      color0   #3B4252
-      color8   #4C566A
-
-      # red
-      color1   #BF616A
-      color9   #BF616A
-
-      # green
-      color2   #A3BE8C
-      color10  #A3BE8C
-
-      # yellow
-      color3   #EBCB8B
-      color11  #EBCB8B
-
-      # blue
-      color4  #81A1C1
-      color12 #81A1C1
-
-      # magenta
-      color5   #B48EAD
-      color13  #B48EAD
-
-      # cyan
-      color6   #88C0D0
-      color14  #8FBCBB
-
-      # white
-      color7   #E5E9F0
-      color15  #ECEFF4
+      background            #001e26
+      foreground            #708183
+      cursor                #708183
+      selection_background  #002731
+      color0                #002731
+      color8                #465a61
+      color1                #d01b24
+      color9                #bd3612
+      color2                #728905
+      color10               #465a61
+      color3                #a57705
+      color11               #52676f
+      color4                #2075c7
+      color12               #708183
+      color5                #c61b6e
+      color13               #5856b9
+      color6                #259185
+      color14               #81908f
+      color7                #e9e2cb
+      color15               #fcf4dc
+      selection_foreground  #001e26
     '';
   };
 }
