@@ -8,6 +8,7 @@ in
     ./fish.nix
     ./kitty.nix
     ./git.nix
+    ./i3.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -35,7 +36,7 @@ in
       in
       [
         # cargo-sweep
-        # rustup
+        rustup
         acpi
         alacritty
         bat

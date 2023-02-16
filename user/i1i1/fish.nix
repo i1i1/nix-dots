@@ -62,7 +62,6 @@
       end
 
       set -gx CARGO_TARGET_DIR $HOME/.cargo-target
-      bass source $HOME/.cargo/env
       fish_add_path $HOME/.local/bin
       set -U fish_user_paths $HOME/.local/bin $fish_user_paths
       set -U fish_user_paths $HOME/.dotfiles $fish_user_paths

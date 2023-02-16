@@ -49,7 +49,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.localtime.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -61,12 +60,25 @@
       };
     };
   };
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+    ];
+  };
 
   services.blueman.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.i1i1 = {
     isNormalUser = true;
+    initialPassword = "1488";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.fish;
   };
@@ -74,7 +86,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.shells = [ ];
-  environment.systemPackages = [ ];
+  environment.systemPackages = [ pkgs.git ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
