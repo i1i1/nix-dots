@@ -1,4 +1,16 @@
 { pkgs, ... }:
+
+let
+  codeium = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "codeium";
+    src = pkgs.fetchFromGitHub {
+      owner = "Exafunction";
+      repo = "codeium.vim";
+      rev = "88a6a07080301858b0bd02d04f18aa33c96e353c";
+      hash = "sha256-PNNzdMbMImqh0qe2duQX/GF2MzJIGTUtbN5gKVCwJ70=";
+    };
+  };
+in
 {
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
@@ -62,7 +74,12 @@
 
       nvim-cmp = {
         enable = true;
-        sources = [{ name = "nvim_lsp"; } { name = "luasnip"; } { name = "crates"; } { name = "path"; }];
+        sources =
+          let
+            source = source: { name = source; };
+          in
+          map source [ "nvim_lsp" "luasnip" "crates" "path" ];
+
         mappingPresets = [ "insert" ];
         mapping = {
           "<CR>" = "cmp.mapping.confirm({ select = true })";
@@ -130,6 +147,7 @@
     };
 
     extraPlugins = with pkgs.vimPlugins; [
+      codeium
       fidget-nvim
       crates-nvim
     ];
