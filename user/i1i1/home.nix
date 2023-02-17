@@ -7,6 +7,7 @@ in
     ./nvim.nix
     ./fish.nix
     ./kitty.nix
+    ./polybar.nix
     ./git.nix
     ./i3.nix
   ];
@@ -29,9 +30,6 @@ in
 
     packages = with pkgs;
       let
-        polybar = pkgs.polybar.override {
-          i3Support = true;
-        };
         firefox = callPackage ./firefox.nix { };
       in
       [
@@ -57,7 +55,6 @@ in
         neovide
         pavucontrol
         pinentry_gtk2
-        polybar
         python311
         ripgrep
         scrot
@@ -68,6 +65,7 @@ in
         wget
         xorg.xbacklight
         zlib
+        (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
       ];
   };
 
@@ -82,6 +80,8 @@ in
       nix-direnv.enable = true;
     };
   };
+
+  fonts.fontconfig.enable = true;
 
   services = {
     gpg-agent = {

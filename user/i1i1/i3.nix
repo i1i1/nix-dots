@@ -28,6 +28,13 @@ in
           "${mod}+r" = "mode \"default\"";
         };
 
+        bars = [ ];
+
+        gaps = {
+          inner = 5;
+          outer = 5;
+        };
+
         window = {
           hideEdgeBorders = "both";
 
@@ -102,6 +109,16 @@ in
           }
           {
             command = "systemctl --user restart polybar.service";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "firefox";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "telegram-desktop";
             always = true;
             notification = false;
           }

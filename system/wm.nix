@@ -16,8 +16,4 @@
 
   hardware.pulseaudio.enable = true;
   programs.dconf.enable = true;
-
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
-  ];
 }
