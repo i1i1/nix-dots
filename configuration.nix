@@ -75,14 +75,6 @@
     driSupport = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gtk
-    ];
-  };
-
   services.blueman.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

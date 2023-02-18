@@ -55,7 +55,7 @@
       end
 
       function chnix
-          pushd ~/.dotfiles/system
+          pushd ~/.dotfiles/
           $EDITOR configuration.nix
           apply-system
           popd

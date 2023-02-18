@@ -27,19 +27,19 @@
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/E57D-AE86";
+      device = "/dev/disk/by-partlabel/esp";
       fsType = "vfat";
     };
 
   fileSystems."/nix" =
     {
-      device = "/dev/disk/by-uuid/738ae39a-6555-4be1-aa4e-7921a7871f04";
+      device = "/dev/disk/by-partlabel/nix";
       fsType = "ext4";
     };
 
   fileSystems."/home" =
     {
-      device = "/dev/disk/by-uuid/351b6ccb-e796-48ed-87cd-55c2def8fe17";
+      device = "/dev/disk/by-partlabel/home";
       fsType = "ext4";
     };
 
@@ -58,7 +58,7 @@
     };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/d0bbd164-1bf2-48cd-a2c3-3400baf6d33a"; }];
+    [{ device = "/dev/disk/by-partlabel/swap"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -69,8 +69,8 @@
   # networking.interfaces.wlp7s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
 }

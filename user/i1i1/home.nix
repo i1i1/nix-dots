@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
-  homeDirectory = "/home/i1i1";
+  username = "i1i1";
+  homeDirectory = "/home/${username}";
 in
 {
   imports = [
@@ -15,13 +16,7 @@ in
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
-    username = "i1i1";
-    homeDirectory = homeDirectory;
-
-    keyboard = {
-      layout = "us,ru";
-      options = [ "grp:alt_shift_toggle" "caps:swapescape" ];
-    };
+    inherit username homeDirectory;
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -32,6 +27,11 @@ in
     # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "22.11";
+
+    keyboard = {
+      layout = "us,ru";
+      options = [ "grp:alt_shift_toggle" "caps:swapescape" ];
+    };
 
     packages = with pkgs;
       let
