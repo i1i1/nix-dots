@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 with pkgs; wrapFirefox firefox-esr-unwrapped {
   nixExtensions = [
     (fetchFirefoxAddon {

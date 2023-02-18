@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = github:pta2002/nixvim;
+      url = "github:pta2002/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -35,6 +35,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
+                useUserPkgs = true;
                 useGlobalPkgs = true;
               };
             }

@@ -64,7 +64,7 @@ in
       lsp = {
         enable = true;
         servers = {
-          rnix-lsp.enable = true;
+          nil_ls.enable = true;
           rust-analyzer.enable = true;
         };
         onAttach = ''
@@ -147,7 +147,7 @@ in
     };
 
     extraPlugins = with pkgs.vimPlugins; [
-      codeium
+      # codeium
       fidget-nvim
       crates-nvim
     ];
