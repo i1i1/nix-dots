@@ -92,9 +92,10 @@
   services.blueman.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = true;
   users.users.i1i1 = {
     isNormalUser = true;
-    initialPassword = "1488";
+    hashedPassword = "$6$hmYNQ2jo5Z70p2Am$tvp6rq2lly1iaMgAQgOq03ZWyA29ZKwKrUOUNZvuEDqg1ot2AUCS762JPpzEWfVLnGSaBgIiaFqxnSwS4fkGv1";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.fish;
   };
