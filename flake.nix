@@ -25,12 +25,13 @@
 
     in
     {
-      nixosConfigurations = {
-        i1i1 = lib.nixosSystem {
+      nixosConfigurations =
+        let system = hardware: lib.nixosSystem {
           inherit system;
 
           modules = [
-            ./system/configuration.nix
+            ./configuration.nix
+            hardware
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -39,7 +40,10 @@
             }
           ];
         };
-      };
+        in
+        {
+          "i1i1" = system ./hardware/pc.nix;
+        };
       homeConfigurations.i1i1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [

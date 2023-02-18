@@ -5,12 +5,6 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   nix = {
     settings = {
       auto-optimise-store = true;
