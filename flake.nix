@@ -35,7 +35,6 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
-                useUserPkgs = true;
                 useGlobalPkgs = true;
               };
             }
@@ -44,6 +43,7 @@
         in
         {
           "i1i1" = system ./hardware/pc.nix;
+          "i1i1@laptop" = system ./hardware/laptop.nix;
         };
       homeConfigurations.i1i1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
