@@ -9,7 +9,6 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./wm.nix
     ];
 
   nix = {
@@ -35,6 +34,23 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
+
+
+  # Enable the X11 windowing system.
+  services.xserver = {
+    enable = true;
+    libinput.enable = true;
+    displayManager.defaultSession = "none+fake";
+    displayManager.session =
+      [{
+        manage = "window";
+        name = "fake";
+        start = "";
+      }];
+  };
+
+  hardware.pulseaudio.enable = true;
+  programs.dconf.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

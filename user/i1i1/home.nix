@@ -18,6 +18,11 @@ in
     username = "i1i1";
     homeDirectory = homeDirectory;
 
+    keyboard = {
+      layout = "us,ru";
+      options = [ "grp:alt_shift_toggle" "caps:swapescape" ];
+    };
+
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards
