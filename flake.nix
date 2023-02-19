@@ -27,7 +27,7 @@
     {
       nixosConfigurations =
         let system = hardware: lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
 
           modules = [
             ./configuration.nix
@@ -47,6 +47,7 @@
         };
       homeConfigurations.i1i1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+
         modules = [
           ./user/i1i1/home.nix
           nixvim.homeManagerModules.nixvim
