@@ -15,7 +15,17 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  environment.etc."machine-id".source = "/nix/persist/etc/machine-id";
+  environment.persistence."/nix/persist" = {
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
+      "/etc/NetworkManager/system-connections"
+    ];
+    files = [ "/etc/machine-id" ];
+  };
 
   fileSystems."/" = {
     device = "none";
@@ -36,18 +46,6 @@
   fileSystems."/home" = {
     device = "/dev/disk/by-partlabel/home";
     fsType = "ext4";
-  };
-
-  fileSystems."/etc/nixos" = {
-    device = "/nix/persist/etc/nixos";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
-  fileSystems."/var/log" = {
-    device = "/nix/persist/var/log";
-    fsType = "none";
-    options = [ "bind" ];
   };
 
   swapDevices = [{ device = "/dev/disk/by-partlabel/swap"; }];

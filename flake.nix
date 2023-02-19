@@ -11,9 +11,10 @@
       url = "github:pta2002/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, impermanence, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -29,6 +30,7 @@
             inherit system pkgs;
 
             modules = [
+              impermanence.nixosModules.impermanence
               ./configuration.nix
               hardware
               home-manager.nixosModules.home-manager
@@ -42,7 +44,11 @@
       homeConfigurations.i1i1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        modules = [ ./user/i1i1/home.nix nixvim.homeManagerModules.nixvim ];
+        modules = [
+          ./user/i1i1/home.nix
+          nixvim.homeManagerModules.nixvim
+          impermanence.nixosModules.home-manager.impermanence
+        ];
       };
     };
 }
