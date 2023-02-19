@@ -3,8 +3,15 @@ let
   username = "i1i1";
   homeDirectory = "/home/${username}";
 in {
-  imports =
-    [ ./nvim.nix ./fish.nix ./kitty.nix ./polybar.nix ./git.nix ./i3.nix ];
+  imports = [
+    ./nvim.nix
+    ./fish.nix
+    ./kitty.nix
+    ./polybar.nix
+    ./git.nix
+    ./i3.nix
+    ./firefox.nix
+  ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -26,43 +33,40 @@ in {
       options = [ "grp:alt_shift_toggle" "caps:swapescape" ];
     };
 
-    packages = with pkgs;
-      let firefox = callPackage ./firefox.nix { };
-      in [
-        # cargo-sweep
-        rustup
-        acpi
-        alacritty
-        bat
-        chromium
-        dmenu
-        exa
-        feh
-        file
-        firefox
-        git
-        git-crypt
-        gnupg
-        htop
-        i3lock
-        killall
-        ltrace
-        nano
-        neovide
-        pavucontrol
-        pinentry_gtk2
-        python311
-        ripgrep
-        scrot
-        strace
-        tdesktop
-        unzip
-        usbutils
-        wget
-        xorg.xbacklight
-        zlib
-        (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
-      ];
+    packages = with pkgs; [
+      # cargo-sweep
+      rustup
+      acpi
+      alacritty
+      bat
+      chromium
+      dmenu
+      exa
+      feh
+      file
+      git
+      git-crypt
+      gnupg
+      htop
+      i3lock
+      killall
+      ltrace
+      nano
+      neovide
+      pavucontrol
+      pinentry_gtk2
+      python311
+      ripgrep
+      scrot
+      strace
+      tdesktop
+      unzip
+      usbutils
+      wget
+      xorg.xbacklight
+      zlib
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
+    ];
   };
 
   # Let Home Manager install and manage itself.
@@ -85,6 +89,9 @@ in {
       enableSshSupport = true;
     };
   };
+
+  xdg.enable = true;
+  xdg.mimeApps.enable = true;
 
   systemd.user = {
     # TODO
