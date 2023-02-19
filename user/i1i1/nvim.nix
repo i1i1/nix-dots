@@ -10,8 +10,7 @@ let
       hash = "sha256-PNNzdMbMImqh0qe2duQX/GF2MzJIGTUtbN5gKVCwJ70=";
     };
   };
-in
-{
+in {
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
 
@@ -74,11 +73,8 @@ in
 
       nvim-cmp = {
         enable = true;
-        sources =
-          let
-            source = source: { name = source; };
-          in
-          map source [ "nvim_lsp" "luasnip" "crates" "path" ];
+        sources = let source = source: { name = source; };
+        in map source [ "nvim_lsp" "luasnip" "crates" "path" ];
 
         mappingPresets = [ "insert" ];
         mapping = {
@@ -98,9 +94,7 @@ in
           auto = true;
           otherHintsPrefix = "  ";
         };
-        server = {
-          checkOnSave.command = "clippy";
-        };
+        server = { checkOnSave.command = "clippy"; };
       };
 
       lspkind = {
@@ -134,7 +128,10 @@ in
         ensureInstalled = "all";
       };
 
-      lualine = { enable = true; theme = "ayu_dark"; };
+      lualine = {
+        enable = true;
+        theme = "ayu_dark";
+      };
 
       comment-nvim.enable = true;
       lsp-lines.enable = true;

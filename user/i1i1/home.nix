@@ -2,16 +2,9 @@
 let
   username = "i1i1";
   homeDirectory = "/home/${username}";
-in
-{
-  imports = [
-    ./nvim.nix
-    ./fish.nix
-    ./kitty.nix
-    ./polybar.nix
-    ./git.nix
-    ./i3.nix
-  ];
+in {
+  imports =
+    [ ./nvim.nix ./fish.nix ./kitty.nix ./polybar.nix ./git.nix ./i3.nix ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -34,10 +27,8 @@ in
     };
 
     packages = with pkgs;
-      let
-        firefox = callPackage ./firefox.nix { };
-      in
-      [
+      let firefox = callPackage ./firefox.nix { };
+      in [
         # cargo-sweep
         rustup
         acpi

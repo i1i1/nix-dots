@@ -10,7 +10,9 @@
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
       substituters = [ "https://nix-gaming.cachix.org" ];
-      trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
+      trusted-public-keys = [
+        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      ];
     };
 
     gc = {
@@ -27,23 +29,22 @@
   networking.hostName = "i1i1"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
-
 
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     libinput.enable = true;
     displayManager.defaultSession = "none+fake";
-    displayManager.session =
-      [{
-        manage = "window";
-        name = "fake";
-        start = "";
-      }];
+    displayManager.session = [{
+      manage = "window";
+      name = "fake";
+      start = "";
+    }];
   };
 
   hardware.pulseaudio.enable = true;
@@ -67,11 +68,7 @@
   sound.enable = true;
   hardware.bluetooth = {
     enable = true;
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-      };
-    };
+    settings = { General = { Enable = "Source,Sink,Media,Socket"; }; };
   };
   hardware.opengl = {
     enable = true;
@@ -84,7 +81,8 @@
   users.mutableUsers = true;
   users.users.i1i1 = {
     isNormalUser = true;
-    hashedPassword = "$6$hmYNQ2jo5Z70p2Am$tvp6rq2lly1iaMgAQgOq03ZWyA29ZKwKrUOUNZvuEDqg1ot2AUCS762JPpzEWfVLnGSaBgIiaFqxnSwS4fkGv1";
+    hashedPassword =
+      "$6$hmYNQ2jo5Z70p2Am$tvp6rq2lly1iaMgAQgOq03ZWyA29ZKwKrUOUNZvuEDqg1ot2AUCS762JPpzEWfVLnGSaBgIiaFqxnSwS4fkGv1";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.fish;
   };
@@ -100,8 +98,10 @@
     mtr.enable = true;
     steam = {
       enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      remotePlay.openFirewall =
+        true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall =
+        true; # Open ports in the firewall for Source Dedicated Server
     };
   };
 

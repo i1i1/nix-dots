@@ -4,62 +4,53 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   services.xserver.dpi = 130;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   environment.etc."machine-id".source = "/nix/persist/etc/machine-id";
 
-  fileSystems."/" =
-    {
-      device = "none";
-      fsType = "tmpfs";
-      options = [ "defaults" "size=4G" "mode=755" ];
-    };
+  fileSystems."/" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=4G" "mode=755" ];
+  };
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-partlabel/esp";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-partlabel/esp";
+    fsType = "vfat";
+  };
 
-  fileSystems."/nix" =
-    {
-      device = "/dev/disk/by-partlabel/nix";
-      fsType = "ext4";
-    };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-partlabel/nix";
+    fsType = "ext4";
+  };
 
-  fileSystems."/home" =
-    {
-      device = "/dev/disk/by-partlabel/home";
-      fsType = "ext4";
-    };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-partlabel/home";
+    fsType = "ext4";
+  };
 
-  fileSystems."/etc/nixos" =
-    {
-      device = "/nix/persist/etc/nixos";
-      fsType = "none";
-      options = [ "bind" ];
-    };
+  fileSystems."/etc/nixos" = {
+    device = "/nix/persist/etc/nixos";
+    fsType = "none";
+    options = [ "bind" ];
+  };
 
-  fileSystems."/var/log" =
-    {
-      device = "/nix/persist/var/log";
-      fsType = "none";
-      options = [ "bind" ];
-    };
+  fileSystems."/var/log" = {
+    device = "/nix/persist/var/log";
+    fsType = "none";
+    options = [ "bind" ];
+  };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-partlabel/swap"; }];
+  swapDevices = [{ device = "/dev/disk/by-partlabel/swap"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -71,8 +62,13 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
-  hardware.opengl.extraPackages = with pkgs; [ amdvlk rocm-opencl-icd rocm-opencl-runtime ];
+  hardware.opengl.extraPackages = with pkgs; [
+    amdvlk
+    rocm-opencl-icd
+    rocm-opencl-runtime
+  ];
 }
