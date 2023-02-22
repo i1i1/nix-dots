@@ -35,28 +35,32 @@ in {
 
     packages = with pkgs; [
       # cargo-sweep
-      rustup
       acpi
       alacritty
       bat
       chromium
+      clang
       dmenu
       exa
       feh
       file
       git
       git-crypt
+      gnumake
       gnupg
       htop
       i3lock
       killall
+      llvm
       ltrace
       nano
       neovide
       pavucontrol
       pinentry_gtk2
+      protobuf3_8
       python311
       ripgrep
+      rustup
       scrot
       strace
       tdesktop
@@ -84,6 +88,7 @@ in {
   fonts.fontconfig.enable = true;
 
   services = {
+    syncthing.enable = true;
     gpg-agent = {
       enable = true;
       enableSshSupport = true;

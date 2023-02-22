@@ -16,6 +16,12 @@ let
             "https://addons.mozilla.org/firefox/downloads/file/4053198/tree_style_tab-3.9.12.xpi";
           sha256 = "sha256-ii47IjdWwLqQlg7N3GTSgrTcgpOhwYyaGwx3kp3Kpbg=";
         })
+        (fetchFirefoxAddon {
+          name = "languagetool";
+          url =
+            "https://addons.mozilla.org/firefox/downloads/file/4034972/languagetool-6.0.1.xpi";
+          sha256 = "sha256-pyQ5JY1+k3Ylt2KrTjXifYC927G/nFeUfmXslNhYfnk=";
+        })
       ];
 
       extraPolicies = {
