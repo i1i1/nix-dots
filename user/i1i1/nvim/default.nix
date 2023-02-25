@@ -12,7 +12,7 @@ let
   };
 in
 {
-  imports = [ ./nvim-tree.nix ./options.nix ./lsp ];
+  imports = [ ./autocommands.nix ./nvim-tree.nix ./options.nix ./lsp ];
 
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
