@@ -10,11 +10,9 @@ let
       hash = "sha256-PNNzdMbMImqh0qe2duQX/GF2MzJIGTUtbN5gKVCwJ70=";
     };
   };
-in {
-  imports = [
-    ./nvim-tree.nix
-    ./rust.nix
-  ];
+in
+{
+  imports = [ ./nvim-tree.nix ./lsp ];
 
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
@@ -59,52 +57,6 @@ in {
     };
 
     plugins = {
-      lsp = {
-        enable = true;
-        servers = {
-          nil_ls.enable = true;
-        };
-        onAttach = ''
-          vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format { async = false }]]
-        '';
-      };
-
-      nvim-cmp = {
-        enable = true;
-        sources = let source = source: { name = source; };
-        in map source [ "nvim_lsp" "luasnip" "crates" "path" ];
-
-        mappingPresets = [ "insert" ];
-        mapping = {
-          "<CR>" = "cmp.mapping.confirm({ select = true })";
-          "<S-Tab>" = "cmp.mapping.select_prev_item()";
-          "<C-k>" = "cmp.mapping.select_prev_item()";
-          "<Tab>" = "cmp.mapping.select_next_item()";
-          "<C-j>" = "cmp.mapping.select_next_item()";
-        };
-        formatting.fields = [ "kind" "abbr" "menu" ];
-      };
-
-      lspkind = {
-        enable = true;
-        cmp.ellipsisChar = "...";
-        cmp.menu = {
-          buffer = "[Buffer]";
-          nvim_lsp = "[LSP]";
-          luasnip = "[LuaSnip]";
-          nvim_lua = "[Lua]";
-          latex_symbols = "[Latex]";
-        };
-        cmp.after = ''
-          function(entry, vim_item, kind)
-            local strings = vim.split(kind.kind, "%s", { trimempty = true })
-            kind.kind = " " .. strings[1] .. " "
-            kind.menu = "   " .. strings[2]
-            return kind
-          end
-        '';
-      };
-
       treesitter = {
         enable = true;
         nixGrammars = true;
@@ -117,22 +69,15 @@ in {
       };
 
       comment-nvim.enable = true;
-      lsp-lines.enable = true;
       nix.enable = true;
       nvim-autopairs.enable = true;
       bufferline.enable = true;
-      cmp_luasnip.enable = true;
       luasnip.enable = true;
       telescope.enable = true;
     };
 
-    extraPlugins = with pkgs.vimPlugins; [
-      # codeium
-      fidget-nvim
-    ];
+    # extraPlugins = [ codeium ];
     extraConfigLua = ''
-      require"fidget".setup{}
-
       if vim.g.neovide then
         vim.opt.guifont = { "FiraCode", "h14", "#e-subpixelantialias", "#e-antialias", "#h-full" }
         vim.g.neovide_scale_factor = 0.5
