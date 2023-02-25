@@ -12,7 +12,7 @@ let
   };
 in
 {
-  imports = [ ./autocommands.nix ./nvim-tree.nix ./options.nix ./lsp ];
+  imports = [ ./autocommands.nix ./nvim-tree.nix ./options.nix ./neovide.nix ./lsp ];
 
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
@@ -64,13 +64,6 @@ in
     };
 
     # extraPlugins = [ codeium ];
-    extraConfigLua = ''
-      if vim.g.neovide then
-        vim.opt.guifont = { "FiraCode", "h14", "#e-subpixelantialias", "#e-antialias", "#h-full" }
-        vim.g.neovide_scale_factor = 0.5
-      end
-    '';
-
     extraPackages = [ pkgs.xclip ];
   };
 }
