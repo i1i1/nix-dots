@@ -2,7 +2,8 @@
 let
   username = "i1i1";
   homeDirectory = "/home/${username}";
-in {
+in
+{
   imports = [
     ./nvim
     ./fish.nix
@@ -69,6 +70,7 @@ in {
       wget
       xorg.xbacklight
       zlib
+      libreoffice
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
     ];
   };
