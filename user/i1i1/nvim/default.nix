@@ -12,7 +12,7 @@ let
   };
 in
 {
-  imports = [ ./nvim-tree.nix ./lsp ];
+  imports = [ ./nvim-tree.nix ./options.nix ./lsp ];
 
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
@@ -21,19 +21,6 @@ in
     enable = true;
     colorschemes.onedark.enable = true;
     globals.mapleader = " ";
-
-    options = {
-      number = true;
-      relativenumber = true;
-
-      tabstop = 4;
-      shiftwidth = 4;
-      expandtab = true;
-
-      laststatus = 3;
-
-      termguicolors = true;
-    };
 
     maps = {
       normal = {
