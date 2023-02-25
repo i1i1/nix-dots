@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   firefox = with pkgs;
@@ -61,14 +61,24 @@ let
         lockPref("devtools.theme","dark");
       '';
     };
-in {
+in
+{
   home.sessionVariables.BROWSER = "firefox";
   systemd.user.sessionVariables.BROWSER = "firefox";
 
-  xdg.mimeApps = {
-    associations.added."text/html" = [ "firefox.desktop" ];
-    defaultApplications."text/html" = [ "firefox.desktop" ];
-  };
+  xdg.mimeApps =
+    let
+      mimeScheme = scheme: {
+        associations.added.${scheme} = [ "firefox.desktop" ];
+        defaultApplications.${scheme} = [ "firefox.desktop" ];
+      };
+    in
+    lib.lists.fold
+      (a: b: a // b)
+      { }
+      (map
+        mimeScheme
+        [ "text/html" "x-scheme-handler/http" "x-scheme-handler/https" ]);
 
   home.packages = [ firefox ];
 }
