@@ -11,7 +11,10 @@ let
     };
   };
 in {
-  imports = [ ./nvim-tree.nix ];
+  imports = [
+    ./nvim-tree.nix
+    ./rust.nix
+  ];
 
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
@@ -60,7 +63,6 @@ in {
         enable = true;
         servers = {
           nil_ls.enable = true;
-          rust-analyzer.enable = true;
         };
         onAttach = ''
           vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format { async = false }]]
@@ -81,16 +83,6 @@ in {
           "<C-j>" = "cmp.mapping.select_next_item()";
         };
         formatting.fields = [ "kind" "abbr" "menu" ];
-      };
-
-      rust-tools = {
-        enable = true;
-        reloadWorkspaceFromCargoToml = true;
-        inlayHints = {
-          auto = true;
-          otherHintsPrefix = "  ";
-        };
-        server = { checkOnSave.command = "clippy"; };
       };
 
       lspkind = {
@@ -137,11 +129,9 @@ in {
     extraPlugins = with pkgs.vimPlugins; [
       # codeium
       fidget-nvim
-      crates-nvim
     ];
     extraConfigLua = ''
       require"fidget".setup{}
-      require"crates".setup{}
 
       if vim.g.neovide then
         vim.opt.guifont = { "FiraCode", "h14", "#e-subpixelantialias", "#e-antialias", "#h-full" }
