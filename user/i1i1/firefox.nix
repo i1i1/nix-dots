@@ -22,6 +22,12 @@ let
             "https://addons.mozilla.org/firefox/downloads/file/4034972/languagetool-6.0.1.xpi";
           sha256 = "sha256-pyQ5JY1+k3Ylt2KrTjXifYC927G/nFeUfmXslNhYfnk=";
         })
+        (fetchFirefoxAddon {
+          name = "bitwarden";
+          url =
+            "https://addons.mozilla.org/firefox/downloads/file/4054938/bitwarden_password_manager-2023.1.0.xpi";
+          sha256 = "sha256-sQeTD90AWqxpRiIquLgMeJ8XvY5szWnE9KHP4QKxyWQ=";
+        })
       ];
 
       extraPolicies = {
