@@ -6,7 +6,7 @@
       enable = true;
       sources =
         let source = source: { name = source; };
-        in map source [ "nvim_lsp" "luasnip" "crates" "path" ];
+        in map source [ "nvim_lsp" "codeium" "luasnip" "crates" "path" ];
 
       mapping = {
         "<CR>" = "cmp.mapping.confirm({ select = true })";
