@@ -4,7 +4,7 @@ let
   homeDirectory = "/home/${username}";
 in {
   imports = [
-    ./nvim.nix
+    ./nvim
     ./fish.nix
     ./kitty.nix
     ./polybar.nix

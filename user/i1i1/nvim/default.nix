@@ -11,6 +11,8 @@ let
     };
   };
 in {
+  imports = [ ./nvim-tree.nix ];
+
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
 
@@ -34,12 +36,6 @@ in {
 
     maps = {
       normal = {
-        "<C-b>" = {
-          action = ":NvimTreeToggle<CR>";
-          noremap = true;
-          silent = true;
-        };
-
         "<leader>ff" = {
           action = ''<cmd>lua require("telescope.builtin").find_files()<CR>'';
           noremap = true;
@@ -117,11 +113,6 @@ in {
         '';
       };
 
-      nvim-tree = {
-        enable = true;
-        openOnSetup = true;
-        git.enable = true;
-      };
       treesitter = {
         enable = true;
         nixGrammars = true;
