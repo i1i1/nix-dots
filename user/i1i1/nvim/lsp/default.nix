@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [ ./rust.nix ./completion.nix ];
+  imports = [ ./rust.nix ./completion.nix ./symbols-outline.nix ];
 
   programs.nixvim = {
     maps.normal = {
