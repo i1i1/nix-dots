@@ -12,7 +12,15 @@ let
   };
 in
 {
-  imports = [ ./autocommands.nix ./nvim-tree.nix ./options.nix ./neovide.nix ./lsp ];
+  imports = [
+    ./autocommands.nix
+    ./lsp
+    ./neovide.nix
+    ./nvim-tree.nix
+    ./options.nix
+    ./telescope.nix
+    ./treesitter.nix
+  ];
 
   home.sessionVariables.EDITOR = "nvim";
   systemd.user.sessionVariables.EDITOR = "nvim";
@@ -23,12 +31,6 @@ in
     globals.mapleader = " ";
 
     plugins = {
-      treesitter = {
-        enable = true;
-        nixGrammars = true;
-        ensureInstalled = "all";
-      };
-
       lualine = {
         enable = true;
         theme = "ayu_dark";
