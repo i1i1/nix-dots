@@ -48,7 +48,7 @@
         inherit pkgs;
 
         modules = [
-          ./user/i1i1/home.nix
+          ./home
           nixvim.homeManagerModules.nixvim
           impermanence.nixosModules.home-manager.impermanence
         ];
