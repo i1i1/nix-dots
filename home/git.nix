@@ -1,7 +1,13 @@
 { ... }: {
   programs.git = {
     enable = true;
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        side-by-side = true;
+        line-numbers = true;
+      };
+    };
     userName = "i1i1";
     userEmail = "vanyarybin1@live.ru";
     extraConfig = { init = { defaultBranch = "master"; }; };
