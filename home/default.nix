@@ -34,50 +34,53 @@ in
       options = [ "grp:alt_shift_toggle" "caps:swapescape" ];
     };
 
-    packages = with pkgs; [
-      # cargo-sweep
-      acpi
-      alacritty
-      bat
-      chromium
-      clang
-      dmenu
-      exa
-      feh
-      file
-      gnumake
-      gnupg
-      htop
-      i3lock
-      killall
-      llvm
-      ltrace
-      nano
-      neovide
-      pavucontrol
-      pinentry_gtk2
-      protobuf3_8
-      python311
-      ripgrep
-      rustup
-      scrot
-      strace
-      tdesktop
-      unzip
-      usbutils
-      wget
-      xorg.xbacklight
-      zlib
-      libreoffice
-      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
-    ];
+    packages = with pkgs;
+      let
+        terminal = [
+          acpi
+          file
+          gnupg
+          htop
+          killall
+          ltrace
+          strace
+          unzip
+          usbutils
+          wget
+          zlib
+        ];
+        wm = [
+          dmenu
+          feh
+          i3lock
+          xorg.xbacklight
+        ];
+        gui = [
+          alacritty
+          chromium
+          libreoffice
+          neovide
+          pavucontrol
+          pinentry_gtk2
+          scrot
+          tdesktop
+        ];
+        dev = [
+          python311
+          clang
+          gnumake
+          llvm
+          rustup
+          protobuf3_8
+        ];
+      in
+      terminal ++ wm ++ gui ++ dev ++ [ (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; }) ];
   };
 
   # Let Home Manager install and manage itself.
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
-    fzf.enable = true;
 
     direnv = {
       enable = true;
