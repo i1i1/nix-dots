@@ -45,8 +45,6 @@ in
       exa
       feh
       file
-      git
-      git-crypt
       gnumake
       gnupg
       htop
