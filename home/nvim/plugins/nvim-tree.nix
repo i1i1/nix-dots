@@ -6,7 +6,6 @@
       enable = true;
 
       autoClose = true;
-      openOnSetup = true;
 
       diagnostics = {
         enable = true;
