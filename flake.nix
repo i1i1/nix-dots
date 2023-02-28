@@ -12,9 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, impermanence, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, impermanence, nixos-hardware, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -27,22 +28,27 @@
     {
       nixosConfigurations =
         let
-          system = hardware:
+          system = hardwareModules:
             lib.nixosSystem {
               inherit system pkgs;
 
               modules = [
                 impermanence.nixosModules.impermanence
                 ./configuration.nix
-                hardware
                 home-manager.nixosModules.home-manager
                 { home-manager = { useGlobalPkgs = true; }; }
-              ];
+              ] ++ hardwareModules;
             };
         in
         {
-          "i1i1" = system ./hardware/pc.nix;
-          "i1i1@laptop" = system ./hardware/laptop.nix;
+          "i1i1" = system (with nixos-hardware.nixosModules;
+            [
+              ./hardware/pc.nix
+              common-pc-ssd
+              common-gpu-amd
+              common-cpu-intel-cpu-only
+            ]);
+          "i1i1@laptop" = system [ ./hardware/laptop.nix nixos-hardware.nixosModules.dell-xps-13-9310 ];
         };
       homeConfigurations.i1i1 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
