@@ -21,9 +21,7 @@
       nv = "nvim";
       cat = "bat";
       grep = "rg";
-      apply-user = "home-manager switch --flake ~/.dotfiles#i1i1";
-      apply-system = "sudo nixos-rebuild switch --flake ~/.dotfiles#";
-      update-system = "nix flake update ~/.dotfiles";
+      nac = "sudo nixos-rebuild switch --flake ~/.dotfiles#";
     };
 
     plugins =
@@ -52,18 +50,25 @@
       }];
 
     shellInit = ''
-      function chhm
-          pushd ~/.dotfiles/user/i1i1/
-          $EDITOR home.nix
-          apply-user
+      function chvim
+          pushd ~/.dotfiles/home/nvim/
+          $EDITOR default.nix
           popd
+          nac
+      end
+
+      function chhm
+          pushd ~/.dotfiles/home/
+          $EDITOR default.nix
+          popd
+          nac
       end
 
       function chnix
           pushd ~/.dotfiles/
           $EDITOR configuration.nix
-          apply-system
           popd
+          nac
       end
 
       set -gx CARGO_TARGET_DIR $HOME/.cargo-target

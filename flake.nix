@@ -22,42 +22,42 @@
         inherit system;
         config = { allowUnfree = true; };
       };
-      lib = nixpkgs.lib;
+      nixosSystem = { hardwareModules }: nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
 
+        modules = hardwareModules ++ [
+          impermanence.nixosModules.impermanence
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.i1i1 = import ./home;
+              extraSpecialArgs = {
+                inherit nixvim;
+              };
+            };
+          }
+        ];
+      };
     in
     {
-      nixosConfigurations =
-        let
-          system = hardwareModules:
-            lib.nixosSystem {
-              inherit system pkgs;
-
-              modules = [
-                impermanence.nixosModules.impermanence
-                ./configuration.nix
-                home-manager.nixosModules.home-manager
-                { home-manager = { useGlobalPkgs = true; }; }
-              ] ++ hardwareModules;
-            };
-        in
-        {
-          "i1i1" = system (with nixos-hardware.nixosModules;
-            [
-              ./hardware/pc.nix
-              common-pc-ssd
-              common-gpu-amd
-              common-cpu-intel-cpu-only
-            ]);
-          "i1i1@laptop" = system [ ./hardware/laptop.nix nixos-hardware.nixosModules.dell-xps-13-9310 ];
+      nixosConfigurations = {
+        "i1i1" = nixosSystem {
+          hardwareModules = with nixos-hardware.nixosModules; [
+            ./hardware/pc.nix
+            common-pc-ssd
+            common-gpu-amd
+            common-cpu-intel-cpu-only
+          ];
         };
-      homeConfigurations.i1i1 = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        modules = [
-          ./home
-          nixvim.homeManagerModules.nixvim
-          impermanence.nixosModules.home-manager.impermanence
-        ];
+        "i1i1@laptop" = nixosSystem {
+          hardwareModules = [
+            ./hardware/laptop.nix
+            nixos-hardware.nixosModules.dell-xps-13-9310
+          ];
+        };
       };
     };
 }

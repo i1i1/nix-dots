@@ -1,8 +1,4 @@
 { pkgs, ... }:
-let
-  username = "i1i1";
-  homeDirectory = "/home/${username}";
-in
 {
   imports = [
     ./nvim
@@ -16,8 +12,9 @@ in
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home = {
-    inherit username homeDirectory;
+  home = rec {
+    username = "i1i1";
+    homeDirectory = "/home/${username}";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
