@@ -6,6 +6,15 @@
       enable = true;
 
       autoClose = true;
+      autoReloadOnWrite = true;
+      disableNetrw = true;
+      openOnSetup = true;
+
+      actions.openFile = {
+        resizeWindow = true;
+        windowPicker.enable = true;
+        windowPicker.chars = "hjkl";
+      };
 
       diagnostics = {
         enable = true;
@@ -17,8 +26,8 @@
           error = "";
         };
       };
-      git.enable = true;
 
+      git.enable = true;
       updateFocusedFile.enable = true;
 
       filters = {
