@@ -66,15 +66,22 @@ in
           tdesktop
         ];
         dev = [
-          python311
           clang
           gnumake
           llvm
-          rustup
           protobuf3_8
+          python311
+          rustup
+        ];
+        misc = [
+          appimage-run
+          sidequest
+        ];
+        fonts = [
+          (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
         ];
       in
-      terminal ++ wm ++ gui ++ dev ++ [ (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; }) ];
+      terminal ++ wm ++ gui ++ dev ++ misc ++ fonts;
   };
 
   # Let Home Manager install and manage itself.
