@@ -38,8 +38,11 @@
           file
           gnupg
           htop
+          jq
           killall
           ltrace
+          openssl
+          pup
           strace
           unzip
           usbutils
