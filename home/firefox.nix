@@ -3,34 +3,6 @@
 let
   firefox = with pkgs;
     wrapFirefox firefox-esr-unwrapped {
-      nixExtensions = [
-        (fetchFirefoxAddon {
-          name = "ublock";
-          url = "https://addons.mozilla.org/firefox/downloads/file/3679754/ublock_origin-1.31.0-an+fx.xpi";
-          sha256 = "1h768ljlh3pi23l27qp961v1hd0nbj2vasgy11bmcrlqp40zgvnr";
-        })
-        (fetchFirefoxAddon {
-          name = "tree-style-tab";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4053198/tree_style_tab-3.9.12.xpi";
-          sha256 = "sha256-ii47IjdWwLqQlg7N3GTSgrTcgpOhwYyaGwx3kp3Kpbg=";
-        })
-        (fetchFirefoxAddon {
-          name = "languagetool";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4034972/languagetool-6.0.1.xpi";
-          sha256 = "sha256-pyQ5JY1+k3Ylt2KrTjXifYC927G/nFeUfmXslNhYfnk=";
-        })
-        (fetchFirefoxAddon {
-          name = "bitwarden";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4054938/bitwarden_password_manager-2023.1.0.xpi";
-          sha256 = "sha256-sQeTD90AWqxpRiIquLgMeJ8XvY5szWnE9KHP4QKxyWQ=";
-        })
-        (fetchFirefoxAddon {
-          name = "metamask";
-          url = "https://addons.mozilla.org/firefox/downloads/file/4037096/ether_metamask-10.22.2.xpi";
-          sha256 = "sha256-G+MwJDOcsaxYSUXjahHJmkWnjLeQ0Wven8DU/lGeMzA=";
-        })
-      ];
-
       extraPolicies = {
         CaptivePortal = false;
         DisableFirefoxStudies = true;
@@ -72,6 +44,52 @@ let
     };
 in
 {
+  programs.firefox = {
+    enable = true;
+    package = firefox;
+
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      # metamask
+      tree-style-tab
+      languagetool
+      bitwarden
+
+      # Privacy
+      clearurls
+      decentraleyes
+      disconnect
+      duckduckgo-privacy-essentials
+      ghostery
+      # https-everywhere
+      privacy-badger
+      privacy-redirect
+      ublock-origin
+
+      # Create a different email for each website to hide your real email
+      simplelogin
+    ];
+
+    profiles.i1i1 = {
+      id = 0;
+      isDefault = true;
+      name = "i1i1";
+      settings = {
+        "general.smoothScroll" = true;
+      };
+      extraConfig = ''
+        user_pref("full-screen-api.ignore-widgets", true);
+        user_pref("media.ffmpeg.vaapi.enabled", true);
+        user_pref("media.rdd-vpx.enabled", true);
+      '';
+      userChrome = ''
+        #TabsToolbar { visibility: collapse !important; }
+      '';
+      userContent = ''
+        # Here too
+      '';
+    };
+  };
+
   home.sessionVariables.BROWSER = "firefox";
   systemd.user.sessionVariables.BROWSER = "firefox";
 
@@ -88,6 +106,4 @@ in
       (map
         mimeScheme
         [ "text/html" "x-scheme-handler/http" "x-scheme-handler/https" ]);
-
-  home.packages = [ firefox ];
 }
