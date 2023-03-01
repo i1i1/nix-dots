@@ -45,6 +45,7 @@
           pup
           strace
           unzip
+          zip
           usbutils
           wget
           zlib
@@ -58,6 +59,7 @@
         gui = [
           alacritty
           chromium
+          polkit
           libreoffice
           neovide
           pavucontrol
@@ -70,7 +72,7 @@
           gnumake
           llvm
           protobuf3_8
-          python311
+          (python3.withPackages (p: with p; [ pygame ]))
           rustup
         ];
         misc = [
@@ -88,6 +90,7 @@
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
+    nix-index.enable = true;
 
     direnv = {
       enable = true;

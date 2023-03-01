@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   programs.fzf.enable = true;
   programs.fzf.enableFishIntegration = true;
+  programs.nix-index.enableFishIntegration = true;
   services.gpg-agent.enableFishIntegration = true;
 
   home.packages = with pkgs; [
