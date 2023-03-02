@@ -49,7 +49,7 @@ in
     package = firefox;
 
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      # metamask
+      metamask
       tree-style-tab
       languagetool
       bitwarden
