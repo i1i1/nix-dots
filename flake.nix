@@ -47,16 +47,18 @@
     in
     {
       nixosConfigurations = {
-        "i1i1" = nixosSystem {
+        "i1i1-pc" = nixosSystem {
           hardwareModules = with nixos-hardware.nixosModules; [
+            { networking.hostName = "i1i1-pc"; }
             ./hardware/pc.nix
             common-pc-ssd
             common-gpu-amd
             common-cpu-intel-cpu-only
           ];
         };
-        "i1i1@laptop" = nixosSystem {
+        "i1i1-laptop" = nixosSystem {
           hardwareModules = [
+            { networking.hostName = "i1i1-laptop"; }
             ./hardware/laptop.nix
             nixos-hardware.nixosModules.dell-xps-13-9310
           ];
