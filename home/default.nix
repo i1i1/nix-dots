@@ -9,6 +9,7 @@
     ./i3.nix
     ./picom.nix
     ./firefox.nix
+    ./telegram.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -66,7 +67,6 @@
           pavucontrol
           pinentry_gtk2
           scrot
-          tdesktop
         ];
         dev = [
           clang
