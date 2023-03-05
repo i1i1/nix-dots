@@ -7,6 +7,7 @@
     ./polybar.nix
     ./git.nix
     ./i3.nix
+    ./picom.nix
     ./firefox.nix
   ];
 
