@@ -66,20 +66,21 @@
       };
     in
     # Plenty of ci checks
-    (flake-utils.lib.eachDefaultSystem (system: {
-      checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
-        hooks = {
-          actionlint.enable = true;
-          deadnix.enable = true;
-          nixpkgs-fmt.enable = true;
-          statix.enable = true;
+    flake-utils.lib.eachDefaultSystem
+      (system: {
+        checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            actionlint.enable = true;
+            deadnix.enable = true;
+            nixpkgs-fmt.enable = true;
+            statix.enable = true;
+          };
         };
-      };
-      devShells.default = nixpkgs.legacyPackages.${system}.mkShell {
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
-      };
-    }))
+        devShells.default = nixpkgs.legacyPackages.${system}.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+        };
+      })
 
     // {
       nixosConfigurations = {
