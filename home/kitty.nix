@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   home.sessionVariables.TERMINAL = "kitty";
   systemd.user.sessionVariables.TERMINAL = "kitty";
 
