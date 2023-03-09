@@ -30,7 +30,12 @@
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=4G" "mode=755" ];
+    options = [ "defaults" "size=512M" "mode=755" ];
+  };
+  fileSystems."/tmp" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "rw" "nodev" "nosuid" "size=8G" ];
   };
 
   fileSystems."/boot" = {
