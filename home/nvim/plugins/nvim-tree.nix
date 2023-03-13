@@ -10,11 +10,9 @@
       disableNetrw = true;
       openOnSetup = true;
 
-      actions.openFile = {
-        resizeWindow = true;
-        windowPicker.enable = true;
-        windowPicker.chars = "hjkl";
-      };
+      actions.openFile.resizeWindow = true;
+      actions.windowPicker.enable = true;
+      actions.windowPicker.chars = "hjkl";
 
       diagnostics = {
         enable = true;
