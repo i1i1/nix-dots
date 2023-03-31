@@ -68,8 +68,8 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
+  # # high-resolution display
+  # hardware.video.hidpi.enable = lib.mkDefault true;
   hardware.opengl.extraPackages = with pkgs; [
     amdvlk
     rocm-opencl-icd

@@ -80,7 +80,7 @@
           llvm
           llvm.dev
           cmake
-          protobuf3_8
+          # protobuf3_8
           opencl-headers
           opencl-clhpp
           ocl-icd

@@ -8,7 +8,16 @@
         auto = true;
         otherHintsPrefix = "  ";
       };
-      server = { checkOnSave.command = "clippy"; };
+      server = {
+        checkOnSave = true;
+        check.overrideCommand = [
+          "cargo"
+          "clippy"
+          "--workspace"
+          "--message-format=json"
+          "--all-targets"
+        ];
+      };
     };
   };
 

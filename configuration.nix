@@ -84,6 +84,7 @@
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.fish;
   };
+  programs.fish.enable = true;
 
   security.sudo = {
     enable = true;

@@ -53,28 +53,6 @@ in
     enable = true;
     package = firefox;
 
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      bitwarden
-      languagetool
-      metamask
-      subwallet
-      tree-style-tab
-
-      # Privacy
-      clearurls
-      decentraleyes
-      disconnect
-      duckduckgo-privacy-essentials
-      ghostery
-      # https-everywhere
-      privacy-badger
-      privacy-redirect
-      ublock-origin
-
-      # Create a different email for each website to hide your real email
-      simplelogin
-    ];
-
     profiles.i1i1 = {
       id = 0;
       isDefault = true;
@@ -93,6 +71,28 @@ in
       userContent = ''
         # Here too
       '';
+
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        bitwarden
+        languagetool
+        metamask
+        subwallet
+        tree-style-tab
+
+        # Privacy
+        clearurls
+        decentraleyes
+        disconnect
+        duckduckgo-privacy-essentials
+        ghostery
+        # https-everywhere
+        privacy-badger
+        privacy-redirect
+        ublock-origin
+
+        # Create a different email for each website to hide your real email
+        simplelogin
+      ];
     };
   };
 
