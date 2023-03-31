@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 
 let
+  subwallet = pkgs.fetchFirefoxAddon {
+    name = "subwallet";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4083905/subwallet-0.8.2.xpi";
+    sha256 = "sha256-0DEARaT3VD/sXf0yRe+KUVKm+yvScUBAMm5LMcyrCf4=";
+  };
   firefox = with pkgs;
     wrapFirefox firefox-esr-unwrapped {
       extraPolicies = {
@@ -49,10 +54,11 @@ in
     package = firefox;
 
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      metamask
-      tree-style-tab
-      languagetool
       bitwarden
+      languagetool
+      metamask
+      subwallet
+      tree-style-tab
 
       # Privacy
       clearurls

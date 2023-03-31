@@ -33,6 +33,11 @@
       options = [ "grp:alt_shift_toggle" "caps:swapescape" ];
     };
 
+    # file.".cargo/config.toml".text = ''
+    #   [build]
+    #   rustflags = "-C target-cpu=native"
+    # '';
+
     packages = with pkgs;
       let
         terminal = [
@@ -64,6 +69,7 @@
           polkit
           libreoffice
           neovide
+          discord
           pavucontrol
           pinentry_gtk2
           scrot
@@ -72,7 +78,12 @@
           clang
           gnumake
           llvm
+          llvm.dev
+          cmake
           protobuf3_8
+          opencl-headers
+          opencl-clhpp
+          ocl-icd
           (python3.withPackages (p: with p; [ pygame ]))
           rustup
         ];

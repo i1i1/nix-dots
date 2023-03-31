@@ -64,6 +64,10 @@
           nac
       end
 
+      function update-monorepo-sdk
+         sed -i "s/\"$(rg 'subspace-farmer-components' Cargo.toml | cut -d= -f4 | tr -d ' \"}')\"/\"$argv[1]\"/" Cargo.toml
+      end
+
       set -gx CARGO_TARGET_DIR $HOME/.cargo-target
       fish_add_path $HOME/.local/bin
       set -U fish_user_paths $HOME/.local/bin $fish_user_paths
