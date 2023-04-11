@@ -6,18 +6,18 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "jcdickinson";
       repo = "codeium.nvim";
-      rev = "55fa67bd316e2a4d312b11d68a2c34f898925a7f";
-      hash = "sha256-bmnEaNLxAsGPfiHwmwE/IZvhuBrOcSPFUnP5XCwPutg=";
+      rev = "92424ea4ba665b76d3287f87f664de244ec6ab78";
+      hash = "sha256-7WckEzeyEDf5dm6Tk/DohEFanQPpSdhchnu6Pyhfec0=";
     };
   };
 
   codeium = pkgs.stdenv.mkDerivation rec {
     pname = "codeium";
-    version = "1.1.69";
+    version = "1.1.73";
 
     src = pkgs.fetchurl {
       url = "https://github.com/Exafunction/codeium/releases/download/language-server-v${version}/language_server_linux_x64.gz";
-      sha256 = "sha256-RK2yjxAC88HT6GuXQRmjiDTbkEBU1vJ3a5N1g48pusM=";
+      sha256 = "sha256-TRuV6OiCOfEd1ExPmSOlO5DooS1r67D8B/vsMUIkho0=";
     };
 
     unpackPhase = ''
@@ -30,7 +30,10 @@ let
       install -m755 -D codeium $out/bin/codeium
     '';
 
-    nativeBuildInputs = with pkgs; [ autoPatchelfHook gzip ];
+    nativeBuildInputs = with pkgs; [
+      autoPatchelfHook
+      gzip
+    ];
 
     meta = with lib; {
       homepage = "https://codeium.com";
