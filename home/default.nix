@@ -3,6 +3,7 @@
   imports = [
     ./nvim
     ./fish.nix
+    ./rust.nix
     ./kitty.nix
     ./polybar.nix
     ./git.nix
@@ -34,18 +35,15 @@
       options = [ "grp:alt_shift_toggle" "caps:swapescape" ];
     };
 
-    # file.".cargo/config.toml".text = ''
-    #   [build]
-    #   rustflags = "-C target-cpu=native"
-    # '';
-
     packages = with pkgs;
       let
         terminal = [
+          trickle
           acpi
           file
           gnupg
           htop
+          iotop
           jq
           killall
           ltrace
@@ -76,17 +74,10 @@
           scrot
         ];
         dev = [
-          clang
-          gnumake
-          llvm
-          llvm.dev
-          cmake
-          # protobuf3_8
           opencl-headers
           opencl-clhpp
           ocl-icd
           (python3.withPackages (p: with p; [ pygame ]))
-          rustup
         ];
         misc = [
           appimage-run
