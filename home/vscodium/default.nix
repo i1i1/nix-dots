@@ -30,7 +30,6 @@
 
       # git and github
       github.vscode-pull-request-github
-      eamodio.gitlens
     ];
 
     enableUpdateCheck = false;
