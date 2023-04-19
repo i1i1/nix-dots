@@ -28,6 +28,8 @@
 
       redhat.vscode-yaml
 
+      tamasfe.even-better-toml
+
       # git and github
       github.vscode-pull-request-github
     ];
