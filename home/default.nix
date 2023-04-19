@@ -1,16 +1,17 @@
 { pkgs, ... }:
 {
   imports = [
-    ./nvim
+    ./firefox.nix
     ./fish.nix
-    ./rust.nix
-    ./kitty.nix
-    ./polybar.nix
     ./git.nix
     ./i3.nix
+    ./kitty.nix
+    ./nvim
     ./picom.nix
-    ./firefox.nix
+    ./polybar.nix
+    ./rust.nix
     ./telegram.nix
+    ./vscodium
     ./zathura.nix
   ];
 
@@ -109,6 +110,10 @@
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
+    };
+    gnome-keyring = {
+      enable = true;
+      components = [ "pkcs11" "secrets" "ssh" ];
     };
   };
 

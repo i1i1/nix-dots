@@ -24,6 +24,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs =
@@ -36,6 +42,7 @@
     , nixos-hardware
     , nur
     , pre-commit-hooks
+    , nix-vscode-extensions
     , ...
     }:
     let
@@ -43,7 +50,10 @@
       pkgs = import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
-        overlays = [ nur.overlay ];
+        overlays = [
+          nur.overlay
+          nix-vscode-extensions.overlays.default
+        ];
       };
       nixosSystem = { hardwareModules }: nixpkgs.lib.nixosSystem {
         inherit system pkgs;
