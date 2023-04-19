@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    nil
-    nixpkgs-fmt
+  imports = [
+    ./nix.nix
+    ./rust.nix
   ];
 
   programs.vscode = {
@@ -26,13 +26,6 @@
 
       yzhang.markdown-all-in-one
 
-      jnoortheen.nix-ide
-
-      # Rust
-      rust-lang.rust-analyzer
-      vadimcn.vscode-lldb
-      serayuzgur.crates
-
       redhat.vscode-yaml
 
       # git and github
@@ -48,10 +41,6 @@
       # Spaw ESC and Caps
       "keyboard.dispatch" = "keyCode";
       "workbench.colorTheme" = "Better Solarized Dark";
-
-      "nix.serverPath" = "nil";
-
-      "rust-analyzer.server.path" = "/home/i1i1/.rustup/toolchains/nightly-2023-04-02-x86_64-unknown-linux-gnu/bin/rust-analyzer";
 
       "editor.bracketPairColorization.enabled" = true;
       "editor.guides.bracketPairs" = "active";
