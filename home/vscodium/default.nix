@@ -22,6 +22,7 @@
       zhang-renyang.chat-gpt
       sourcegraph.cody-ai
       sourcegraph.sourcegraph
+      tabnine.tabnine-vscode
 
       # Spellcheck
       streetsidesoftware.code-spell-checker
