@@ -52,6 +52,7 @@
           pup
           strace
           unzip
+          unrar
           zip
           usbutils
           wget
