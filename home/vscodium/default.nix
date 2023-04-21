@@ -8,7 +8,7 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.fhs;
+    # package = pkgs.vscodium;
 
     extensions = with pkgs.vscode-marketplace; [
       # Vim
@@ -32,6 +32,8 @@
       redhat.vscode-yaml
 
       tamasfe.even-better-toml
+
+      ms-azuretools.vscode-docker
 
       # git and github
       github.vscode-pull-request-github

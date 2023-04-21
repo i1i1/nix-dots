@@ -3,7 +3,7 @@
   programs.vscode = {
     extensions = with pkgs.vscode-marketplace; [
       rust-lang.rust-analyzer
-      vadimcn.vscode-lldb
+      # vadimcn.vscode-lldb
       serayuzgur.crates
     ];
     userSettings = {
