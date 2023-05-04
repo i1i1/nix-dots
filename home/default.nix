@@ -3,6 +3,7 @@
   imports = [
     ./dev
     ./dunst.nix
+    ./email
     ./firefox.nix
     ./fish.nix
     ./git.nix
