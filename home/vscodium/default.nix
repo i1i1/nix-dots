@@ -24,6 +24,9 @@
       sourcegraph.sourcegraph
       tabnine.tabnine-vscode
 
+      # Python
+      ms-python.python
+
       # Spellcheck
       streetsidesoftware.code-spell-checker
 

@@ -48,8 +48,8 @@
           jq
           killall
           ltrace
-          openssl
           pup
+          pkg-config
           strace
           unzip
           unrar
@@ -61,6 +61,7 @@
         wm = [
           dmenu
           feh
+          jack2
           i3lock
           xorg.xbacklight
         ];
@@ -69,6 +70,7 @@
           chromium
           polkit
           libreoffice
+          gnome.zenity
           neovide
           discord
           pavucontrol
@@ -78,7 +80,9 @@
         dev = [
           opencl-headers
           opencl-clhpp
+          openssl.dev
           ocl-icd
+          poetry
           (python3.withPackages (p: with p; [ pygame ]))
         ];
         misc = [
