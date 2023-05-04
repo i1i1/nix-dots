@@ -106,6 +106,11 @@
       enable = true;
       nix-direnv.enable = true;
     };
+
+    rbw = {
+      enable = true;
+      settings.email = "vanyarybin1@live.ru";
+    };
   };
 
   fonts.fontconfig.enable = true;
