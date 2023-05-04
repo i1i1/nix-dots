@@ -36,7 +36,7 @@
   fileSystems."/tmp" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "rw" "nodev" "nosuid" "size=8G" ];
+    options = [ "rw" "nodev" "nosuid" "size=32G" ];
   };
 
   fileSystems."/boot" = {
