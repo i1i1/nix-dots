@@ -121,10 +121,6 @@
       enable = true;
       enableSshSupport = true;
     };
-    gnome-keyring = {
-      enable = true;
-      components = [ "pkcs11" "secrets" "ssh" ];
-    };
   };
 
   xdg.enable = true;
