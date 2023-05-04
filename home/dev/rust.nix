@@ -8,11 +8,18 @@
     linker = "clang"
     rustflags = ["-C", "target-cpu=native", "-C", "link-arg=-fuse-ld=mold", "--cfg", "tokio_unstable"]
   '';
+
   home.packages = with pkgs; [
+    # TODO: Extract it to compiled section
+    opencl-headers
+    opencl-clhpp
+    openssl.dev
+    ocl-icd
+
+    # Standart tools
     clang
     cmake
     gnumake
-    llvm
     llvm.dev
     mold
     protobuf3_20

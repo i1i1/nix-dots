@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./dev
     ./firefox.nix
     ./fish.nix
     ./git.nix
@@ -9,7 +10,6 @@
     ./nvim
     ./picom.nix
     ./polybar.nix
-    ./rust.nix
     ./telegram.nix
     ./vscodium
     ./zathura.nix
@@ -38,24 +38,20 @@
 
     packages = with pkgs;
       let
-        terminal = [
-          trickle
+        terminal_prelude = [
           acpi
           file
           gnupg
           htop
           iotop
-          jq
           killall
-          ltrace
-          pup
           pkg-config
-          strace
-          unzip
+          trickle
           unrar
-          zip
+          unzip
           usbutils
           wget
+          zip
           zlib
         ];
         wm = [
@@ -77,14 +73,6 @@
           pinentry_gtk2
           scrot
         ];
-        dev = [
-          opencl-headers
-          opencl-clhpp
-          openssl.dev
-          ocl-icd
-          poetry
-          (python3.withPackages (p: with p; [ pygame ]))
-        ];
         misc = [
           appimage-run
           sidequest
@@ -93,7 +81,7 @@
           (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
         ];
       in
-      terminal ++ wm ++ gui ++ dev ++ misc ++ fonts;
+      terminal_prelude ++ wm ++ gui ++ misc ++ fonts;
   };
 
   # Let Home Manager install and manage itself.
