@@ -7,7 +7,7 @@ let
     sha256 = "sha256-0DEARaT3VD/sXf0yRe+KUVKm+yvScUBAMm5LMcyrCf4=";
   };
   firefox = with pkgs;
-    wrapFirefox firefox-esr-unwrapped {
+    wrapFirefox firefox-unwrapped {
       extraPolicies = {
         CaptivePortal = false;
         DisableFirefoxStudies = true;
