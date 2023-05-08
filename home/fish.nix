@@ -65,7 +65,13 @@
       end
 
       function update-monorepo-sdk
-         sed -i "s/\"$(rg 'subspace-farmer-components' Cargo.toml | cut -d= -f4 | tr -d ' \"}')\"/\"$argv[1]\"/" Cargo.toml
+          set old_hash $(find . -name Cargo.toml | xargs rg 'subspace-farmer-components = \{ git' | head -1 | cut -d= -f4 | tr -d ' \"}')
+          find . -name Cargo.toml | xargs sed -i "s/\"$old_hash\"/\"$argv[1]\"/"
+      end
+
+      function update-substrate-sdk
+          set old_hash $(find . -name Cargo.toml | xargs rg 'frame-support = \{ .*git' | head -1 | cut -d= -f5 | tr -d ' \"}')
+          find . -name Cargo.toml | xargs sed -i "s/\"$old_hash\"/\"$argv[1]\"/"
       end
 
       set -gx CARGO_TARGET_DIR $HOME/.cargo-target
