@@ -13,7 +13,7 @@
     ./picom.nix
     ./polybar.nix
     ./telegram.nix
-    ./vscodium
+    ./vscode
     ./zathura.nix
   ];
 
