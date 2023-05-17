@@ -1,5 +1,36 @@
 { pkgs, ... }:
 
+let
+  # No telemetry config. Taken from here: https://gist.github.com/hyperupcall/99e355405611be6c4e0a38b6e3e8aad0
+  noTelemetrySettings = {
+    "clangd.checkUpdates" = false;
+    "code-runner.enableAppInsights" = false;
+    "docker-explorer.enableTelemetry" = false;
+    "extensions.ignoreRecommendations" = true;
+    "gitlens.showWelcomeOnInstall" = false;
+    "gitlens.showWhatsNewAfterUpgrades" = false;
+    "java.help.firstView" = "none";
+    "java.help.showReleaseNotes" = false;
+    "julia.enableTelemetry" = false;
+    "kite.showWelcomeNotificationOnStartup" = false;
+    "liveServer.settings.donotShowInfoMsg" = true;
+    "Lua.telemetry.enable" = false;
+    "material-icon-theme.showWelcomeMessage" = false;
+    "pros.showWelcomeOnStartup" = false;
+    "pros.useGoogleAnalytics" = false;
+    "redhat.telemetry.enabled" = false;
+    "rpcServer.showStartupMessage" = false;
+    "shellcheck.disableVersionCheck" = true;
+    "sonarlint.disableTelemetry" = true;
+    "telemetry.enableCrashReporter" = false;
+    "telemetry.enableTelemetry" = false;
+    "telemetry.telemetryLevel" = "off";
+    "terraform.telemetry.enabled" = false;
+    "update.showReleaseNotes" = false;
+    "vsicons.dontShowNewVersionMessage" = true;
+    "workbench.welcomePage.walkthroughs.openOnInstall" = false;
+  };
+in
 {
   imports = [
     ./nix.nix
@@ -8,7 +39,6 @@
 
   programs.vscode = {
     enable = true;
-    # package = pkgs.vscodium;
 
     extensions = with pkgs.vscode-marketplace; [
       # Vim
@@ -46,7 +76,7 @@
     enableExtensionUpdateCheck = false;
     mutableExtensionsDir = false;
 
-    userSettings = {
+    userSettings = noTelemetrySettings // {
       # Spaw ESC and Caps
       "keyboard.dispatch" = "keyCode";
       "workbench.colorTheme" = "Better Solarized Dark";
