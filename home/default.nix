@@ -75,6 +75,10 @@
           pinentry_gtk2
           scrot
         ];
+        games = [
+          yuzu-ea
+          qbittorrent
+        ];
         misc = [
           appimage-run
           sidequest
@@ -83,7 +87,7 @@
           (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
         ];
       in
-      terminal_prelude ++ wm ++ gui ++ misc ++ fonts;
+      terminal_prelude ++ wm ++ gui ++ misc ++ fonts ++ games;
   };
 
   # Let Home Manager install and manage itself.
