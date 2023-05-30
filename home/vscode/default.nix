@@ -35,6 +35,7 @@ in
   imports = [
     ./nix.nix
     ./rust.nix
+    ./solidity.nix
   ];
 
   programs.vscode = {
