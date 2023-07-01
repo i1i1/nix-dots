@@ -30,6 +30,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+
+    hosts.url = "github:StevenBlack/hosts";
   };
 
   outputs =
@@ -43,6 +45,7 @@
     , nur
     , pre-commit-hooks
     , nix-vscode-extensions
+    , hosts
     , ...
     }:
     let
@@ -62,6 +65,10 @@
           impermanence.nixosModules.impermanence
           ./configuration.nix
           home-manager.nixosModules.home-manager
+          hosts.nixosModule
+          {
+            networking.stevenBlackHosts.enable = true;
+          }
           {
             home-manager = {
               useGlobalPkgs = true;

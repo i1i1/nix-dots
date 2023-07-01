@@ -113,6 +113,13 @@
 
   virtualisation.docker.enable = true;
 
+  networking.stevenBlackHosts = {
+    blockFakenews = true;
+    blockGambling = true;
+    blockPorn = true;
+    blockSocial = true;
+  };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
