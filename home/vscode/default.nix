@@ -71,6 +71,8 @@ in
 
       # git and github
       github.vscode-pull-request-github
+
+      hashicorp.terraform
     ];
 
     enableUpdateCheck = false;
