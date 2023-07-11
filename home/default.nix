@@ -42,6 +42,7 @@
       let
         terminal_prelude = [
           acpi
+          bind
           file
           gnupg
           htop
