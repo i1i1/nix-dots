@@ -68,8 +68,7 @@
           hosts.nixosModule
           {
             networking.stevenBlackHosts.enable = true;
-          }
-          {
+
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -115,6 +114,7 @@
             { networking.hostName = "i1i1-laptop"; }
             ./hardware/laptop.nix
             nixos-hardware.nixosModules.dell-xps-13-9310
+            nixos-hardware.nixosModules.common-hidpi
           ];
         };
       };
