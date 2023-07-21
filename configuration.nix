@@ -12,11 +12,14 @@
       substituters = [
         "https://nix-gaming.cachix.org"
         "https://colmena.cachix.org"
+        "https://i1i1-colmena.cachix.org"
       ];
       trusted-public-keys = [
         "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
         "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
+        "i1i1-colmena.cachix.org-1:YrxuNyeY5PXrwlOWrjKysLHotY/dbgM39dpD4GBp/0U="
       ];
+      trusted-users = [ "root" "i1i1" ];
     };
 
     gc = {
@@ -28,6 +31,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Pick only one of the below networking options.

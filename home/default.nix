@@ -87,8 +87,11 @@
         fonts = [
           (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
         ];
+        nix = [
+          cachix
+        ];
       in
-      terminal_prelude ++ wm ++ gui ++ misc ++ fonts ++ games;
+      terminal_prelude ++ wm ++ gui ++ misc ++ fonts ++ games ++ nix;
   };
 
   # Let Home Manager install and manage itself.
@@ -110,32 +113,11 @@
 
   fonts.fontconfig.enable = true;
 
-  services = {
-    syncthing.enable = true;
-    gpg-agent = {
-      enable = true;
-      enableSshSupport = true;
-    };
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
   };
 
   xdg.enable = true;
   xdg.mimeApps.enable = true;
-
-  systemd.user = {
-    # TODO
-    # services.cargo-sweep = {
-    #   Unit.Description = "Remove unnecessarry cargo files";
-    #   Service = {
-    #     Type = "oneshot";
-    #     ExecStart = "zsh -c \"for d in ~/Work/subspace*; do pushd $d; cargo sweep -t 1; popd; done\"";
-    #   };
-    #   Install.WantedBy = [ "multi-user.target" ];
-    # };
-    #
-    # timers.cargo-sweep-daily = {
-    #   Timer.Unit = "cargo-sweep.service";
-    #   Timer.OnCalendar = "daily";
-    #   Install.WantedBy = [ "timers.target" ];
-    # };
-  };
 }
