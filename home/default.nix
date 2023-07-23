@@ -12,6 +12,7 @@
     ./nvim
     ./picom.nix
     ./polybar.nix
+    ./rbw.nix
     ./telegram.nix
     ./vscode
     ./zathura.nix
@@ -103,11 +104,6 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-    };
-
-    rbw = {
-      enable = true;
-      settings.email = "vanyarybin1@live.ru";
     };
   };
 
