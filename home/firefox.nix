@@ -1,11 +1,6 @@
 { pkgs, lib, ... }:
 
 let
-  subwallet = pkgs.fetchFirefoxAddon {
-    name = "subwallet";
-    url = "https://addons.mozilla.org/firefox/downloads/file/4083905/subwallet-0.8.2.xpi";
-    sha256 = "sha256-0DEARaT3VD/sXf0yRe+KUVKm+yvScUBAMm5LMcyrCf4=";
-  };
   firefox = with pkgs;
     wrapFirefox firefox-unwrapped {
       extraPolicies = {
@@ -22,10 +17,7 @@ let
           Search = false;
           Snippets = false;
         };
-        SearchEngines = {
-          Default = "DuckDuckGo";
-          PreventInstalls = true;
-        };
+        SearchEngines.PreventInstalls = true;
         UserMessaging = {
           WhatsNew = false;
           FeatureRecommentdations = false;
@@ -72,11 +64,34 @@ in
         # Here too
       '';
 
+      search = {
+        force = true;
+        default = "SearX";
+        engines = {
+          "SearX" = {
+            urls = [{
+              template = "https://sx.thatsverys.us/search";
+              params = [{ name = "q"; value = "{searchTerms}"; }];
+            }];
+            suggestUrls = [{
+              template = "https://sx.thatsverys.us/search";
+              params = [{ name = "q"; value = "{searchTerms}"; }];
+            }];
+            definedAliases = [ "@s" ];
+          };
+          "Wikipedia (en)".metaData.hidden = true;
+          "DuckDuckGo".metaData.hidden = true;
+          "Google".metaData.hidden = true;
+          "Amazon.com".metaData.hidden = true;
+          "Bing".metaData.hidden = true;
+          "eBay".metaData.hidden = true;
+        };
+      };
+
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         bitwarden
         languagetool
         metamask
-        subwallet
         tree-style-tab
 
         # Privacy
