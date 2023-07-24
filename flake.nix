@@ -69,7 +69,7 @@
       colmena = {
         meta.nixpkgs = import nixpkgs {
           system = "x86_64-linux";
-          config = { allowUnfree = true; };
+          config.allowUnfree = true;
           overlays = [
             nur.overlay
             nix-vscode-extensions.overlays.default
@@ -79,12 +79,11 @@
         defaults = {
           imports = [
             impermanence.nixosModules.impermanence
-            ./configuration.nix
             home-manager.nixosModules.home-manager
             hosts.nixosModule
+            ./system/modules
+            ./system/configs/shared
           ];
-
-          networking.stevenBlackHosts.enable = true;
 
           home-manager = {
             useGlobalPkgs = true;
@@ -103,7 +102,7 @@
           deployment.targetHost = null;
 
           imports = with nixos-hardware.nixosModules; [
-            ./hardware/pc.nix
+            ./system/configs/pc.nix
             common-pc-ssd
             common-gpu-amd
             common-cpu-intel-cpu-only
@@ -121,7 +120,7 @@
           deployment.targetHost = null;
 
           imports = with nixos-hardware.nixosModules; [
-            ./hardware/laptop.nix
+            ./system/configs/laptop.nix
             dell-xps-13-9310
             common-hidpi
           ];

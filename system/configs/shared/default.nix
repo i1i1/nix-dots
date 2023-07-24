@@ -1,9 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { pkgs, ... }:
-
 {
   nix = {
     settings = {
@@ -29,14 +24,15 @@
     };
   };
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.efi.canTouchEfiVariables = true;
+  features.networking.wireguard = {
+    enable = true;
+    keyCommand = [ "rbw" "get" "--folder" "wireguard" "client0" ];
+    pubkey = "zQpLCtbX/Lu1pmsFDArrmrqe0Cu1AvaM9g59fiPkeHw=";
+    endpoint = "sx.thatsverys.us:51820";
+  };
 
   # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
@@ -53,26 +49,7 @@
     }];
   };
 
-  deployment.keys."wireguard-key".keyCommand = [ "rbw" "get" "--folder" "wireguard" "client0" ];
-  networking.wg-quick.interfaces.wg0 = {
-    address = [ "10.0.103.2/24" ];
-    dns = [ "10.0.103.1" ];
-    privateKeyFile = "/run/keys/wireguard-key";
-
-    peers = [{
-      publicKey = "zQpLCtbX/Lu1pmsFDArrmrqe0Cu1AvaM9g59fiPkeHw=";
-      allowedIPs = [ "0.0.0.0/0" ];
-      endpoint = "sx.thatsverys.us:51820";
-      persistentKeepalive = 25;
-    }];
-  };
-
   hardware.pulseaudio.enable = true;
-  programs.dconf.enable = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -83,16 +60,11 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.bluetooth = {
-    enable = true;
-    settings = { General = { Enable = "Source,Sink,Media,Socket"; }; };
-  };
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
   };
-
-  services.blueman.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = true;
@@ -112,7 +84,6 @@
       Defaults  lecture="never"
     '';
   };
-  security.polkit.enable = true;
 
   environment.shells = [ ];
   environment.systemPackages = [ ];
@@ -120,17 +91,10 @@
   virtualisation.docker.enable = true;
 
   networking.stevenBlackHosts = {
+    enable = true;
     blockFakenews = true;
     blockGambling = true;
     blockPorn = true;
     blockSocial = true;
   };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
 }
