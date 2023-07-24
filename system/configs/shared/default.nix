@@ -31,9 +31,8 @@
       pubkey = "zQpLCtbX/Lu1pmsFDArrmrqe0Cu1AvaM9g59fiPkeHw=";
       endpoint = "sx.thatsverys.us:51820";
     };
-    sound.pulseaudioAndAlsa.enable = true;
+    sound.pipewire.enable = true;
   };
-
 
   # Pick only one of the below networking options.
   networking.networkmanager.enable = true;
