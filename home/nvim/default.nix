@@ -1,7 +1,6 @@
-{ pkgs, nixvim, ... }:
+{ pkgs, ... }:
 {
   imports = [
-    nixvim.homeManagerModules.nixvim
     ./autocommands.nix
     ./plugins
     ./neovide.nix

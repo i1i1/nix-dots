@@ -83,6 +83,7 @@
         nix = [
           appimage-run
           cachix
+          colmena
         ];
       in
       terminal_prelude ++ wm ++ gui ++ fonts ++ nix;

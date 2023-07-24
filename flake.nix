@@ -48,39 +48,6 @@
     , hosts
     , ...
     }:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config = { allowUnfree = true; };
-        overlays = [
-          nur.overlay
-          nix-vscode-extensions.overlays.default
-        ];
-      };
-      nixosSystem = { hardwareModules }: nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-
-        modules = hardwareModules ++ [
-          impermanence.nixosModules.impermanence
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-          hosts.nixosModule
-          {
-            networking.stevenBlackHosts.enable = true;
-
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.i1i1 = import ./home;
-              extraSpecialArgs = {
-                inherit nixvim;
-              };
-            };
-          }
-        ];
-      };
-    in
     # Plenty of ci checks
     flake-utils.lib.eachDefaultSystem
       (system: {
@@ -99,31 +66,67 @@
       })
 
     // {
-      nixosConfigurations = {
-        "i1i1-pc" = nixosSystem {
-          hardwareModules = with nixos-hardware.nixosModules; [
-            {
-              networking.hostName = "i1i1-pc";
-              home-manager.users.i1i1.features = {
-                gui.games = true;
-                gui.misc = true;
-              };
-            }
+      colmena = {
+        meta.nixpkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config = { allowUnfree = true; };
+          overlays = [
+            nur.overlay
+            nix-vscode-extensions.overlays.default
+          ];
+        };
+
+        defaults = {
+          imports = [
+            impermanence.nixosModules.impermanence
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            hosts.nixosModule
+          ];
+
+          networking.stevenBlackHosts.enable = true;
+
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.i1i1 = {
+              imports = [
+                ./home
+                nixvim.homeManagerModules.nixvim
+              ];
+            };
+          };
+        };
+
+        pc = {
+          deployment.allowLocalDeployment = true;
+          deployment.targetHost = null;
+
+          imports = with nixos-hardware.nixosModules; [
             ./hardware/pc.nix
             common-pc-ssd
             common-gpu-amd
             common-cpu-intel-cpu-only
           ];
+
+          networking.hostName = "pc";
+          home-manager.users.i1i1.features = {
+            gui.games = true;
+            gui.misc = true;
+          };
         };
-        "i1i1-laptop" = nixosSystem {
-          hardwareModules = [
-            {
-              networking.hostName = "i1i1-laptop";
-            }
+
+        laptop = {
+          deployment.allowLocalDeployment = true;
+          deployment.targetHost = null;
+
+          imports = with nixos-hardware.nixosModules; [
             ./hardware/laptop.nix
-            nixos-hardware.nixosModules.dell-xps-13-9310
-            nixos-hardware.nixosModules.common-hidpi
+            dell-xps-13-9310
+            common-hidpi
           ];
+
+          networking.hostName = "laptop";
         };
       };
     };
