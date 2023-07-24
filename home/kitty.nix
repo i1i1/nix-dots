@@ -1,6 +1,7 @@
 {
   home.sessionVariables.TERMINAL = "kitty";
   systemd.user.sessionVariables.TERMINAL = "kitty";
+  home.sessionVariables.TERM = "xterm";
 
   programs.kitty = {
     enable = true;

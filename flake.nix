@@ -102,7 +102,13 @@
       nixosConfigurations = {
         "i1i1-pc" = nixosSystem {
           hardwareModules = with nixos-hardware.nixosModules; [
-            { networking.hostName = "i1i1-pc"; }
+            {
+              networking.hostName = "i1i1-pc";
+              home-manager.users.i1i1.features = {
+                gui.games = true;
+                gui.misc = true;
+              };
+            }
             ./hardware/pc.nix
             common-pc-ssd
             common-gpu-amd
@@ -111,7 +117,9 @@
         };
         "i1i1-laptop" = nixosSystem {
           hardwareModules = [
-            { networking.hostName = "i1i1-laptop"; }
+            {
+              networking.hostName = "i1i1-laptop";
+            }
             ./hardware/laptop.nix
             nixos-hardware.nixosModules.dell-xps-13-9310
             nixos-hardware.nixosModules.common-hidpi

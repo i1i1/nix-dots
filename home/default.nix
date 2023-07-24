@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./dev
@@ -7,6 +7,7 @@
     ./firefox.nix
     ./fish.nix
     ./git.nix
+    ./gui.nix
     ./i3.nix
     ./kitty.nix
     ./nvim
@@ -20,9 +21,9 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home = rec {
+  home = {
     username = "i1i1";
-    homeDirectory = "/home/${username}";
+    homeDirectory = "/home/${config.home.username}";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -46,6 +47,7 @@
           bind
           file
           gnupg
+          home-manager
           htop
           iotop
           killall
@@ -69,30 +71,21 @@
           alacritty
           chromium
           polkit
-          libreoffice
           gnome.zenity
           neovide
-          discord
           pavucontrol
           pinentry_gtk2
           scrot
-        ];
-        games = [
-          yuzu-ea
-          qbittorrent
-        ];
-        misc = [
-          appimage-run
-          sidequest
         ];
         fonts = [
           (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Hack" ]; })
         ];
         nix = [
+          appimage-run
           cachix
         ];
       in
-      terminal_prelude ++ wm ++ gui ++ misc ++ fonts ++ games ++ nix;
+      terminal_prelude ++ wm ++ gui ++ fonts ++ nix;
   };
 
   # Let Home Manager install and manage itself.

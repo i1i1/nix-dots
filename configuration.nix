@@ -67,9 +67,6 @@
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable sound.
   sound.enable = true;
   hardware.bluetooth = {
@@ -107,17 +104,6 @@
   # $ nix search wget
   environment.shells = [ ];
   environment.systemPackages = [ pkgs.git ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs = {
-    mtr.enable = true;
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    };
-  };
 
   virtualisation.docker.enable = true;
 
