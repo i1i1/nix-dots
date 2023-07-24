@@ -24,12 +24,16 @@
     };
   };
 
-  features.networking.wireguard = {
-    enable = true;
-    keyCommand = [ "rbw" "get" "--folder" "wireguard" "client0" ];
-    pubkey = "zQpLCtbX/Lu1pmsFDArrmrqe0Cu1AvaM9g59fiPkeHw=";
-    endpoint = "sx.thatsverys.us:51820";
+  features = {
+    networking.wireguard = {
+      enable = true;
+      keyCommand = [ "rbw" "get" "--folder" "wireguard" "client0" ];
+      pubkey = "zQpLCtbX/Lu1pmsFDArrmrqe0Cu1AvaM9g59fiPkeHw=";
+      endpoint = "sx.thatsverys.us:51820";
+    };
+    sound.pulseaudioAndAlsa.enable = true;
   };
+
 
   # Pick only one of the below networking options.
   networking.networkmanager.enable = true;
@@ -49,17 +53,12 @@
     }];
   };
 
-  hardware.pulseaudio.enable = true;
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     useXkbConfig = true; # use xkbOptions in tty.
   };
-
-  # Enable sound.
-  sound.enable = true;
 
   hardware.opengl = {
     enable = true;
