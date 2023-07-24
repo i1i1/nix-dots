@@ -53,6 +53,20 @@
     }];
   };
 
+  deployment.keys."wireguard-key".keyCommand = [ "rbw" "get" "--folder" "wireguard" "client0" ];
+  networking.wg-quick.interfaces.wg0 = {
+    address = [ "10.0.103.2/24" ];
+    dns = [ "10.0.103.1" ];
+    privateKeyFile = "/run/keys/wireguard-key";
+
+    peers = [{
+      publicKey = "zQpLCtbX/Lu1pmsFDArrmrqe0Cu1AvaM9g59fiPkeHw=";
+      allowedIPs = [ "0.0.0.0/0" ];
+      endpoint = "sx.thatsverys.us:51820";
+      persistentKeepalive = 25;
+    }];
+  };
+
   hardware.pulseaudio.enable = true;
   programs.dconf.enable = true;
 
@@ -100,10 +114,8 @@
   };
   security.polkit.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.shells = [ ];
-  environment.systemPackages = [ pkgs.git ];
+  environment.systemPackages = [ ];
 
   virtualisation.docker.enable = true;
 
@@ -113,22 +125,6 @@
     blockPorn = true;
     blockSocial = true;
   };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
