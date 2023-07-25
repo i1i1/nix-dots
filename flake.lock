@@ -23,6 +23,22 @@
         "type": "github"
       }
     },
+    "betterfox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689011265,
+        "narHash": "sha256-qYzc62YmOj6MI5E5yUpNtQzNpgVrBCkzC4A8glUAHjs=",
+        "owner": "yokoffing",
+        "repo": "Betterfox",
+        "rev": "443710b0738ebc8f45296a4f63c0bf362512d72f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yokoffing",
+        "repo": "Betterfox",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -443,6 +459,7 @@
     },
     "root": {
       "inputs": {
+        "betterfox": "betterfox",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hosts": "hosts",

@@ -32,6 +32,11 @@
     };
 
     hosts.url = "github:StevenBlack/hosts";
+
+    betterfox = {
+      url = "github:yokoffing/Betterfox";
+      flake = false;
+    };
   };
 
   outputs =
@@ -46,6 +51,7 @@
     , pre-commit-hooks
     , nix-vscode-extensions
     , hosts
+    , betterfox
     , ...
     }:
     # Plenty of ci checks
@@ -93,6 +99,10 @@
                 ./home
                 nixvim.homeManagerModules.nixvim
               ];
+
+            };
+            extraSpecialArgs = {
+              inherit betterfox;
             };
           };
         };

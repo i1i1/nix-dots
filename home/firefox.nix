@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, betterfox, ... }:
 
 let
   firefox = with pkgs;
@@ -52,11 +52,7 @@ in
       settings = {
         "general.smoothScroll" = true;
       };
-      extraConfig = ''
-        user_pref("full-screen-api.ignore-widgets", true);
-        user_pref("media.ffmpeg.vaapi.enabled", true);
-        user_pref("media.rdd-vpx.enabled", true);
-      '';
+      extraConfig = builtins.readFile "${betterfox}/user.js";
       userChrome = ''
         #TabsToolbar { visibility: collapse !important; }
       '';
@@ -126,5 +122,16 @@ in
       { }
       (map
         mimeScheme
-        [ "text/html" "x-scheme-handler/http" "x-scheme-handler/https" ]);
+        [
+          "text/html"
+          "x-scheme-handler/http"
+          "x-scheme-handler/https"
+          "x-scheme-handler/chrome"
+          "x-scheme-handler/x-extension-htm"
+          "x-scheme-handler/x-extension-html"
+          "x-scheme-handler/x-extension-shtml"
+          "x-scheme-handler/xhtml+xml"
+          "x-scheme-handler/x-extension-xhtml"
+          "x-scheme-handler/x-extension-xht"
+        ]);
 }
