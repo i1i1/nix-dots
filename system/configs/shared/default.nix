@@ -26,8 +26,6 @@
 
   features = {
     networking.wireguard = {
-      enable = true;
-      keyCommand = [ "rbw" "get" "--folder" "wireguard" "client0" ];
       pubkey = "zQpLCtbX/Lu1pmsFDArrmrqe0Cu1AvaM9g59fiPkeHw=";
       endpoint = "sx.thatsverys.us:51820";
     };

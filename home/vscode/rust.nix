@@ -7,8 +7,6 @@
       serayuzgur.crates
     ];
     userSettings = {
-      "rust-analyzer.server.path" = "/home/i1i1/.rustup/toolchains/nightly-2023-04-02-x86_64-unknown-linux-gnu/bin/rust-analyzer";
-
       "[rust]" = {
         "editor.fontLigatures" = true;
         "editor.formatOnSave" = true;

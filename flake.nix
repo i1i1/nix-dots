@@ -118,6 +118,15 @@
             common-cpu-intel-cpu-only
           ];
 
+          features.networking.wireguard.enable = true;
+          features.networking.wireguard.keyCommand = [
+            "rbw"
+            "get"
+            "--folder"
+            "wireguard"
+            "client2"
+          ];
+
           networking.hostName = "pc";
           home-manager.users.i1i1.features = {
             gui.games = true;
@@ -133,6 +142,15 @@
             ./system/configs/laptop.nix
             dell-xps-13-9310
             common-hidpi
+          ];
+
+          features.networking.wireguard.enable = true;
+          features.networking.wireguard.keyCommand = [
+            "rbw"
+            "get"
+            "--folder"
+            "wireguard"
+            "client0"
           ];
 
           networking.hostName = "laptop";
