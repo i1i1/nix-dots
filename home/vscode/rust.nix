@@ -16,7 +16,7 @@
       "rust-analyzer.check.command" = "clippy";
 
       # use nightly range formatting, should be faster
-      "rust-analyzer.rustfmt.rangeFormatting.enable" = true;
+      # "rust-analyzer.rustfmt.rangeFormatting.enable" = true;
 
       # use lldb for debugging
       "rust-analyzer.debug.engine" = "vadimcn.vscode-lldb";
