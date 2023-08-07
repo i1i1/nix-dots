@@ -37,6 +37,11 @@
       url = "github:yokoffing/Betterfox";
       flake = false;
     };
+
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -52,6 +57,7 @@
     , nix-vscode-extensions
     , hosts
     , betterfox
+    , nix-index-database
     , ...
     }:
     # Plenty of ci checks
@@ -97,9 +103,9 @@
             users.i1i1 = {
               imports = [
                 ./home
+                nix-index-database.hmModules.nix-index
                 nixvim.homeManagerModules.nixvim
               ];
-
             };
             extraSpecialArgs = {
               inherit betterfox;
